@@ -1,0 +1,8 @@
+/build
+/config
+/mocks
+/node_modules
+/public
+.eslintrc.js
+.prettierrc.js
+App.test.js

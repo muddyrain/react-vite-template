@@ -1,10 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
-
+import { useEffect, useState } from "react";
+import reactLogo from "./assets/react.svg";
+import "./App.css";
+import axios from "axios";
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    axios
+      .get("/api/list", {
+        params: {
+          pageSize: 10,
+          page: 1,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      });
+  }, []);
   return (
     <div className="App">
       <div>
@@ -28,7 +39,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
