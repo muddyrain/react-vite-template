@@ -5,4 +5,5 @@ export type FormerComponent = FC<FormerProps> & {
   useForm: () => [FormInstance<RecordType>];
 };
 const TranFormer = Fromer as FormerComponent;
+TranFormer.useForm = Form.useForm;
 export default TranFormer;

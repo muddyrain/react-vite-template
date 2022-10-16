@@ -9,6 +9,8 @@ const { Link } = Typography;
 
 interface BreadcrumbProps {
   configuration: RoutesProps;
+  routes: RoutesProps[];
+  accountInfo: any;
 }
 const Fragment: FC<BreadcrumbProps> = ({ configuration }) => {
   const navigate = useNavigate();

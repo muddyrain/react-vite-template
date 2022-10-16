@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Layout,
@@ -14,11 +13,18 @@ import {
 import { LeftOutlined, ExportOutlined } from "@ant-design/icons";
 import baseApi from "@/api/baseApi";
 import styles from "./index.module.less";
+import { FC } from "react";
+import { RoutesProps } from "./config";
 
 const { Header } = Layout;
 const { Title, Text } = Typography;
 
-const Fragment = ({ accountInfo, configuration }) => {
+interface HeaderProps {
+  configuration: RoutesProps;
+  routes: RoutesProps[];
+  accountInfo: any;
+}
+const Fragment: FC<HeaderProps> = ({ accountInfo, configuration }) => {
   const navigate = useNavigate();
   const { name, breadcrumb } = configuration;
 

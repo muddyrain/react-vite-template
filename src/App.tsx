@@ -8,10 +8,11 @@ import { RoutesProps } from "./layouts/config";
 import { ReactNode } from "react";
 import { Routes_DEFAULT_PATH } from "./constant";
 
+const { NotFound } = Layouts;
 moment.locale("zh-cn");
 
 // 渲染路由
-const renderRoute = (datasource = []) => {
+const renderRoute = (datasource: RoutesProps[] = []) => {
   const list: ReactNode[] = [];
   const recursion = (data: RoutesProps[] = []) => {
     data.forEach((item: RoutesProps) => {
@@ -42,7 +43,7 @@ const App = () => (
       <Routes>
         {renderRoute(routes)}
         <Route path="/" element={<Navigate to={Routes_DEFAULT_PATH} />} />
-        <Route path="/*" element={<Layouts.NotFound />} />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
     </HashRouter>
   </ConfigProvider>

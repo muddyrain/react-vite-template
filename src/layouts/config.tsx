@@ -27,6 +27,7 @@ export interface RoutesProps {
   element?: React.ReactNode;
   icon?: React.ReactNode;
   children?: RoutesProps[];
+  auths?: string[];
 }
 const routes: RoutesProps[] = [
   {

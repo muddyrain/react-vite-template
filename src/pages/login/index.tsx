@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Button, Form } from "antd";
+import { Button } from "antd";
 import { LOGO_DARK_PNG } from "@/assets";
 import baseApi from "@/api/baseApi";
 import styles from "./index.module.less";
 import { Former } from "@/components";
 
 const Fragment = () => {
-  const [$form] = Form.useForm();
+  const [$form] = Former.useForm();
   const [processing, setProcessing] = useState(false);
   return (
     <section className={styles.container}>

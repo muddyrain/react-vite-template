@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Layout } from "antd";
 import styles from "./index.module.less";
-import config from "./config";
-import NotFound from "./not-found";
+import { RoutesProps } from "./config";
 import Header from "./header";
 import Footer from "./footer";
 import Sider from "./sider";
@@ -11,7 +10,12 @@ import Breadcrumb from "./breadcrumb";
 
 const { Content } = Layout;
 
-const Fragment = ({ routes, configuration, children }) => {
+export interface LayoutProps {
+  routes: RoutesProps[];
+  configuration: RoutesProps;
+  children: React.ReactNode;
+}
+const Fragment: FC<LayoutProps> = ({ routes, configuration, children }) => {
   const navigate = useNavigate();
   const accountJSON = window.sessionStorage.getItem("accountInfo");
   const accountInfo = JSON.parse(accountJSON || "{}");
@@ -30,7 +34,9 @@ const Fragment = ({ routes, configuration, children }) => {
     return (
       <section style={configuration?.style || {}}>
         {React.Children.map(children, (child) =>
-          React.cloneElement(child, { authority: configuration?.auths || [] })
+          React.cloneElement(child as any, {
+            authority: configuration?.auths || [],
+          })
         )}
       </section>
     );
@@ -56,7 +62,7 @@ const Fragment = ({ routes, configuration, children }) => {
           <Content className={styles.content}>
             <section>
               {React.Children.map(children, (child) =>
-                React.cloneElement(child, {
+                React.cloneElement(child as any, {
                   authority: configuration?.auths || [],
                 })
               )}
@@ -73,9 +79,5 @@ Fragment.defaultProps = {
   configuration: {},
   routes: [],
 };
-
-Fragment.NotFound = NotFound;
-
-export const routes = config;
 
 export default Fragment;
