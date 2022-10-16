@@ -15,5 +15,10 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         watchFiles: true, // 开启对mock文件的监听
       }),
     ],
+    resolve:{
+      alias:{
+        '@':'/src/',      //格式一定要写对喽不然没有代码提示或者报错
+      }
+    }
   };
 };

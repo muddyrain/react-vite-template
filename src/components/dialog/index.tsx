@@ -1,22 +1,40 @@
-import React, { useState } from 'react';
-import { Modal, Button } from 'antd';
-import Confirm from './confirm';
+import React, { FC, useState } from "react";
+import { Modal, Button, ButtonProps, ModalProps } from "antd";
+import Confirm from "./confirm";
+import { SizeProps } from "@/interface/baseProps";
+import { CommonComponentsProps } from "@/interface/commonComponentsProps";
 
 // 处理框架宽度
-const procedureWidth = (width) => {
+const procedureWidth = (width: SizeProps | number) => {
   switch (width) {
-    case 'small':
+    case "small":
       return 480;
-    case 'medium':
+    case "medium":
       return 680;
-    case 'large':
+    case "large":
       return 880;
     default:
       return width;
   }
 };
 
-const Fragment = ({
+interface DialogProps extends CommonComponentsProps {
+  title?: string;
+  onOpen?: () => void;
+  okText?: React.ReactNode;
+  openText?: React.ReactNode;
+  cancelText?: React.ReactNode;
+  okButtonProps?: ButtonProps;
+  cancelButtonProps?: ButtonProps;
+  openButtonProps?: ButtonProps;
+  onOk?: (hide: () => void) => boolean;
+  onCancel?: () => void;
+  afterClose?: () => void;
+  footer?: (close: () => void) => React.ReactNode | React.ReactNode | any;
+  width?: SizeProps | number;
+  renderOpenButton?: (int: () => void) => void;
+}
+const Fragment: FC<DialogProps> = ({
   className,
   style,
   title,
@@ -29,8 +47,8 @@ const Fragment = ({
   onCancel,
   afterClose,
   footer,
-  children,
   width,
+  children,
   renderOpenButton,
   openButtonProps,
   openText,
@@ -40,17 +58,20 @@ const Fragment = ({
   // 处理打开按钮
   const procedureOpenButton = () => {
     const type = Object.prototype.toString.call(renderOpenButton);
-    if (type === '[object Function]') {
-      return renderOpenButton(() => {
-        onOpen();
-        setVisible(true);
-      });
+    if (type === "[object Function]") {
+      return (
+        renderOpenButton &&
+        renderOpenButton(() => {
+          onOpen && onOpen();
+          setVisible(true);
+        })
+      );
     } else {
       return (
         <Button
           {...openButtonProps}
           onClick={() => {
-            onOpen();
+            onOpen && onOpen();
             setVisible(true);
           }}
         >
@@ -69,42 +90,44 @@ const Fragment = ({
         destroyOnClose
         style={style}
         title={title}
-        width={procedureWidth(width)}
+        width={procedureWidth(width!)}
         visible={visible}
         okText={okText}
         okButtonProps={{
           ...okButtonProps,
           style: {
-            display: okText ? 'inline-block' : 'none',
+            display: okText ? "inline-block" : "none",
             ...(okButtonProps?.style || {}),
           },
         }}
         onOk={() => {
-          const blocker = onOk(() => setVisible(false)); // 拦截器
+          const blocker = onOk && onOk(() => setVisible(false)); // 拦截器
           !blocker && setVisible(false);
         }}
         cancelText={cancelText}
         cancelButtonProps={{
           ...cancelButtonProps,
           style: {
-            display: cancelText ? 'inline-block' : 'none',
+            display: cancelText ? "inline-block" : "none",
             ...(cancelButtonProps?.style || {}),
           },
         }}
         onCancel={() => {
           setVisible(false);
-          onCancel();
+          onCancel && onCancel();
         }}
         afterClose={afterClose}
         {...(() => {
           const type = Object.prototype.toString.call(footer);
-          if (type === '[object Undefined]') {
+          if (type === "[object Undefined]") {
             return {};
-          } else if (type === '[object Function]') {
+          } else if (type === "[object Function]") {
             return {
-              footer: footer(() => {
-                setVisible(false);
-              }),
+              footer:
+                footer &&
+                footer(() => {
+                  setVisible(false);
+                }),
             };
           } else {
             return { footer };
@@ -117,26 +140,24 @@ const Fragment = ({
   );
 };
 
-Fragment.Confirm = Confirm;
+// Fragment.Confirm = Confirm;
 
 Fragment.defaultProps = {
-  showHide: () => {}, // 暴露 hide 方法 [未实现]
   /* ### 按钮属性 ### */
   // visible: null, // 受控 => 开启 visible 为 Boolean 值时，所有 open 都将失效，等效于原 Modal
-  openText: '打开',
+  openText: "打开",
   openButtonProps: {},
   onOpen: () => {},
   renderOpenButton: undefined, // 渲染元素 => undefined || function -> (open = () => {}) => { return Elemet }
   /* ### 弹窗属性 ### */
-  defaultVisible: false, // 初始弹窗显示状态
-  className: '',
+  className: "",
   style: {},
-  title: '弹窗标题',
-  width: 'medium', // 标准弹窗宽度 => small:480 | 【默认】medium:680 | large:880 | integer
-  okText: '确定', // 确定按钮文案 => 值为 false 时，不显示
+  title: "弹窗标题",
+  width: "medium", // 标准弹窗宽度 => small:480 | 【默认】medium:680 | large:880 | integer
+  okText: "确定", // 确定按钮文案 => 值为 false 时，不显示
   okButtonProps: {},
-  onOk: (hide = () => {}) => {}, // 用 return 拦截 visible
-  cancelText: '取消', // 取消按钮文案 => 值为 false 时，不显示
+  onOk: (hide = () => {}) => false, // 用 return 拦截 visible
+  cancelText: "取消", // 取消按钮文案 => 值为 false 时，不显示
   cancelButtonProps: {},
   onCancel: () => {}, // 用 return 拦截 visible
   afterClose: () => {}, // 弹窗完全关闭后的回调

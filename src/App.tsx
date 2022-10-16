@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import "./App.css";
+import "./App.less";
 import axios from "axios";
-import { Block } from "./components";
+import { Block, Dialog } from "./components";
 function App() {
   const [count, setCount] = useState(0);
   useEffect(() => {
@@ -19,7 +18,10 @@ function App() {
   }, []);
   return (
     <div className="App">
+      <h5>test Block Components</h5>
       <Block>block test</Block>
+      <h5>test Dialog Components</h5>
+      <Dialog width={600}>哈哈哈</Dialog>
     </div>
   );
 }

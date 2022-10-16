@@ -1,10 +1,9 @@
 import React, { FC } from "react";
 import { Spin } from "antd";
 import styles from "./index.module.less";
-import { commonComponentsProps } from "@/interface/commonComponentsProps";
+import { CommonComponentsProps } from "@/interface/commonComponentsProps";
 
-interface BlockProps extends commonComponentsProps {
-  children?: React.ReactNode;
+interface BlockProps extends CommonComponentsProps {
   loading?: boolean;
   onClick?: React.MouseEventHandler<HTMLElement> | undefined;
 }
