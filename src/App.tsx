@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.less";
 import axios from "axios";
-import { Block, Dialog, Drawer, Tabler } from "./components";
+import { Block, Dialog, Drawer, Former, Tabler } from "./components";
 function App() {
   const [count, setCount] = useState(0);
   useEffect(() => {
@@ -16,6 +16,7 @@ function App() {
         console.log(res);
       });
   }, []);
+  // const [$form] = Former.useForm();
   return (
     <div className="App">
       <h5>test Block Components</h5>
@@ -24,6 +25,20 @@ function App() {
       <Dialog width={600}>哈哈哈</Dialog>
       <h5>test Drawer Components</h5>
       <Drawer width={600}>哈哈哈</Drawer>
+      <h5>test Drawer Components</h5>
+      <Former
+        datasource={[
+          {
+            rules: [],
+            key: "a",
+            label: "哈哈哈",
+            view: "Input",
+            viewProps: {
+              disabled: true,
+            },
+          },
+        ]}
+      />
       <h5>test Drawer Components</h5>
       <Tabler
         columns={[
