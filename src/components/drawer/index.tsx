@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Drawer, Button } from 'antd';
-import { Align } from '@bees/ui';
-import styles from './index.module.less';
+import React, { useState } from "react";
+import { Drawer, Button } from "antd";
+import { Align } from "@bees/ui";
+import styles from "./index.module.less";
 
 const Fragment = ({
   openText,
@@ -41,7 +41,7 @@ const Fragment = ({
   // 处理打开按钮
   const procedureOpenButton = () => {
     const type = Object.prototype.toString.call(renderOpenButton);
-    if (type === '[object Function]') {
+    if (type === "[object Function]") {
       return renderOpenButton(() => {
         setVisible(true);
         onOpen();
@@ -91,11 +91,11 @@ const Fragment = ({
         keyboard={keyboard}
         width={(() => {
           switch (width) {
-            case 'default':
+            case "default":
               return 680;
-            case 'small':
+            case "small":
               return 480;
-            case 'large':
+            case "large":
               return 880;
             default:
               return width;
@@ -158,10 +158,10 @@ const Fragment = ({
 
 Fragment.defaultProps = {
   renderOpenButton: null,
-  openText: '打开',
+  openText: "打开",
   openProps: {},
-  title: '标题',
-  width: 'default', // default(680) | small(480) | large(880) | Number([0-9]*)
+  title: "标题",
+  width: "default", // default(680) | small(480) | large(880) | Number([0-9]*)
   closable: true,
   maskClosable: true,
   mask: true,
@@ -171,15 +171,15 @@ Fragment.defaultProps = {
   headerStyle: {},
   bodyStyle: {},
   height: 256,
-  className: '',
+  className: "",
   zIndex: 1000,
-  placement: 'right',
+  placement: "right",
   onOpen: () => {},
-  cancelText: '取消', // null(不显示)
+  cancelText: "取消", // null(不显示)
   cancelProps: {},
   onClose: () => {},
-  okText: '确定', // null(不显示)
-  okProps: { type: 'primary' },
+  okText: "确定", // null(不显示)
+  okProps: { type: "primary" },
   onOk: (close) => {},
   afterVisibleChange: (visible) => {},
   afterClose: () => {}, // 关闭之后

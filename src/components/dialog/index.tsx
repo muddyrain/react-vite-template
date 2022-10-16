@@ -91,7 +91,7 @@ const Fragment: FC<DialogProps> = ({
         style={style}
         title={title}
         width={procedureWidth(width!)}
-        visible={visible}
+        open={visible}
         okText={okText}
         okButtonProps={{
           ...okButtonProps,
