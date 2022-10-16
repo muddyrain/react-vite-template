@@ -1,9 +1,42 @@
-import React, { useState } from "react";
-import { Drawer, Button } from "antd";
+import { FC, useState } from "react";
+import { Drawer, Button, ButtonProps } from "antd";
 import { Align } from "@bees/ui";
 import styles from "./index.module.less";
-
-const Fragment = ({
+import { CommonComponentsProps } from "@/interface/commonComponentsProps";
+import { DirectionProps, SizeProps } from "@/interface/baseProps";
+interface DrawerProps extends CommonComponentsProps {
+  title?: string;
+  openText?: React.ReactNode;
+  cancelText?: React.ReactNode;
+  okText?: React.ReactNode;
+  openProps?: ButtonProps;
+  cancelProps?: ButtonProps;
+  okProps?: ButtonProps;
+  width?: SizeProps | number;
+  height?: number;
+  zIndex?: number;
+  closable?: boolean;
+  maskClosable?: boolean;
+  mask?: boolean;
+  keyboard?: boolean;
+  destroyOnClose?: boolean;
+  maskStyle?: React.CSSProperties | undefined;
+  drawerStyle?: React.CSSProperties | undefined;
+  headerStyle?: React.CSSProperties | undefined;
+  bodyStyle?: React.CSSProperties | undefined;
+  placement?: DirectionProps;
+  onOpen?: () => void;
+  onClose?: () => void;
+  onOk?: (hide: () => void) => boolean;
+  afterVisibleChange?: (visible: boolean) => void;
+  afterClose?: () => void;
+  beforeOpen?: () => void;
+  footerRender?: (close: () => void) => React.ReactNode | React.ReactNode | any;
+  renderOpenButton?: (
+    close: () => void
+  ) => React.ReactNode | React.ReactNode | any;
+}
+const Fragment: FC<DrawerProps> = ({
   openText,
   openProps,
   title,
@@ -42,9 +75,9 @@ const Fragment = ({
   const procedureOpenButton = () => {
     const type = Object.prototype.toString.call(renderOpenButton);
     if (type === "[object Function]") {
-      return renderOpenButton(() => {
+      return renderOpenButton!(() => {
         setVisible(true);
-        onOpen();
+        onOpen!();
       });
     } else {
       return (
@@ -52,7 +85,7 @@ const Fragment = ({
           {...openProps}
           onClick={() => {
             setVisible(true);
-            onOpen();
+            onOpen!();
           }}
         >
           {openText}
@@ -81,17 +114,19 @@ const Fragment = ({
         zIndex={zIndex}
         placement={placement}
         afterVisibleChange={(visible) => {
-          afterVisibleChange(visible);
+          afterVisibleChange!(visible);
           if (visible) {
-            beforeOpen();
+            beforeOpen!();
           } else {
-            afterClose();
+            afterClose!();
           }
         }}
         keyboard={keyboard}
         width={(() => {
           switch (width) {
             case "default":
+              return 680;
+            case "medium":
               return 680;
             case "small":
               return 480;
@@ -103,7 +138,7 @@ const Fragment = ({
         })()}
         onClose={() => {
           setVisible(false);
-          onClose();
+          onClose!();
         }}
       >
         {children}
@@ -127,7 +162,7 @@ const Fragment = ({
                   //   },
                   // });
                   setVisible(false);
-                  onClose();
+                  onClose!();
                 }}
               >
                 {cancelText}
@@ -137,7 +172,7 @@ const Fragment = ({
               <Button
                 {...okProps}
                 onClick={() => {
-                  const result = onOk(() => {
+                  const result = onOk!(() => {
                     setVisible(false);
                   });
                   !result && setVisible(false);
@@ -157,7 +192,7 @@ const Fragment = ({
 };
 
 Fragment.defaultProps = {
-  renderOpenButton: null,
+  renderOpenButton: undefined,
   openText: "打开",
   openProps: {},
   title: "标题",
@@ -180,12 +215,12 @@ Fragment.defaultProps = {
   onClose: () => {},
   okText: "确定", // null(不显示)
   okProps: { type: "primary" },
-  onOk: (close) => {},
+  onOk: (close) => false,
   afterVisibleChange: (visible) => {},
   afterClose: () => {}, // 关闭之后
   beforeOpen: () => {}, // 打开之前
   keyboard: true,
-  footerRender: null, // (close) => Element, // null
+  footerRender: undefined, // (close) => Element, // null
 };
 
 export default Fragment;

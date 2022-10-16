@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.less";
 import axios from "axios";
-import { Block, Dialog } from "./components";
+import { Block, Dialog, Drawer } from "./components";
 function App() {
   const [count, setCount] = useState(0);
   useEffect(() => {
@@ -22,6 +22,8 @@ function App() {
       <Block>block test</Block>
       <h5>test Dialog Components</h5>
       <Dialog width={600}>哈哈哈</Dialog>
+      <h5>test Drawer Components</h5>
+      <Drawer width={600}>哈哈哈</Drawer>
     </div>
   );
 }

@@ -9,6 +9,8 @@ const procedureWidth = (width: SizeProps | number) => {
   switch (width) {
     case "small":
       return 480;
+    case "default":
+      return 600;
     case "medium":
       return 680;
     case "large":
