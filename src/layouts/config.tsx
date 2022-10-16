@@ -21,7 +21,7 @@ export interface RoutesProps {
   pure?: boolean;
   hideMenu?: boolean;
   style?: React.CSSProperties | undefined;
-  breadcrumb?: { name?: string; link?: string; href?: string }[];
+  breadcrumb?: { name?: string; link?: string; href?: string; path?: string }[];
   needLogin?: string;
   parentPath?: string;
   element?: React.ReactNode;

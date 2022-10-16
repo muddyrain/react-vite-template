@@ -1,2 +1,31 @@
 // 引入 antd css
-@import url("antd/dist/antd.css");
+@import "antd/dist/antd.css";
+@import "./_theme.less";
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei",
+    FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB",
+    "Hiragino Sans GB W3", Arial, sans-serif, -apple-system, BlinkMacSystemFont,
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
