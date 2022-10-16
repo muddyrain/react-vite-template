@@ -4,13 +4,13 @@ import { Typography } from "antd";
 import Block from "@/components/block";
 import Tabler from "@/components/tabler";
 import styles from "./index.module.less";
-import { useModals } from "./models";
+import { useModels } from "./models";
 import columns from "./columns";
 
 const { Title } = Typography;
 const Fragment = () => {
   const navigate = useNavigate();
-  const { state, getList, dispatch } = useModals({});
+  const { state, getList, dispatch } = useModels();
   const { page, pageSize, updater, datalist, loading, total, list } = state;
   useEffect(() => {
     getList({ page, pageSize });

@@ -10,7 +10,7 @@ import { useReducer } from "react";
 interface initialStateProps extends defaultValueProps {
   list?: string[];
 }
-export const useModals = (initialState: initialStateProps) => {
+export const useModels = (initialState: initialStateProps = {}) => {
   const [state, dispatch] = useReducer<ModalReducer<typeof initialState>>(
     InitReducer,
     Object.assign(defaultValue, initialState)
