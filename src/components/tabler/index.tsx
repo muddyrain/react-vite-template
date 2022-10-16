@@ -1,11 +1,42 @@
 /* eslint-disable no-empty-function */
 /* eslint-disable no-unused-vars */
-import React from 'react';
-import { Table } from 'antd';
-import styles from './index.module.less';
-import handles from './handles';
+import React, { FC } from "react";
+import {
+  ButtonProps,
+  PaginationProps,
+  Table,
+  TableColumnType,
+  TableProps,
+} from "antd";
+import styles from "./index.module.less";
+import handles from "./handles";
+export type RecordType = object;
+export interface TablerActionsProps {
+  key?: string;
+  confirm?: string | ((record: RecordType, index: number) => string);
+  visible?: boolean | ((record: RecordType, index: number) => boolean);
+  loading?: boolean | ((record: RecordType, index: number) => boolean);
+  disabled?: boolean | ((record: RecordType, index: number) => boolean);
+  props?: ButtonProps;
+  content:
+    | React.ReactNode
+    | ((record: RecordType, index: number) => React.ReactNode);
+  onClick?: (record: RecordType, index: number) => void;
+}
+interface TablerProps {
+  className?: string;
+  columns?: TableColumnType<RecordType>[];
+  dataSource?: RecordType[];
+  fixed?: boolean;
+  ordered?: boolean;
+  actionsWidth?: number | string | undefined;
+  actions?: TablerActionsProps[];
+  pagination?: PaginationProps;
+  onPageChange?: (obj: { page: number; size: number }) => void;
+  actionsProps?: TableColumnType<RecordType>;
+}
 
-const Fragment = ({
+const Fragment: FC<TablerProps> = ({
   className,
   columns,
   dataSource,
@@ -26,14 +57,19 @@ const Fragment = ({
       {...handles.procedureFixed({ fixed, columns })}
       columns={[
         ...handles.procedureColumns({ fixed, ordered, columns, pagination }),
-        ...handles.procedureActions({ fixed, actionsWidth, actions, actionsProps }),
+        ...handles.procedureActions({
+          fixed,
+          actionsWidth,
+          actions,
+          actionsProps,
+        }),
       ]}
       pagination={{
-        size: 'default',
+        size: "default",
         showTotal: (value) => `共 ${value} 条`,
         ...pagination,
         onChange: (page, size) => {
-          onPageChange({ page, size });
+          onPageChange!({ page, size });
         },
       }}
     />
@@ -41,7 +77,7 @@ const Fragment = ({
 };
 
 Fragment.defaultProps = {
-  className: '',
+  className: "",
   /**
    * @param {columns} Array<Object>
    * [{
@@ -55,7 +91,7 @@ Fragment.defaultProps = {
   dataSource: [],
   fixed: false, // 是否标记滚动
   ordered: true, // 是否标记序号
-  actionsWidth: null, // 操作列宽度
+  actionsWidth: undefined, // 操作列宽度
   /**
    * @param {actions} Array<Object>
    * [{
@@ -67,11 +103,10 @@ Fragment.defaultProps = {
    *    confirm: '确认删除该条记录？', // 开启二次确认 => string | function -> (record, index) => reutn String | null, // 值为空(假)时不开启，默认不开启
    * }, ...]
    */
-  actions: null,
+  actions: [],
   actionsProps: {}, // 操作列补充
   pagination: {},
-  onPageChange: ({ page = 1, size = 10 }) => {},
-  onReload: null, // 刷新 null | () => {}【未启用】
+  onPageChange: ({ page = 1, size = 10 }) => null,
 };
 
 export default Fragment;
