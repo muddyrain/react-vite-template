@@ -1,0 +1,37 @@
+@import '../common/ref.less';
+
+.layout {
+  height: 100vh;
+  .header {
+    background: #fff;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 20px;
+    .title {
+      margin: 0;
+    }
+  }
+  .breadcrumb {
+    padding: 16px;
+    padding-bottom: 0;
+  }
+  .content {
+    .__scrollbar();
+    height: calc(100vh - 50px - 38px);
+    overflow: auto;
+  }
+  .footer {
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+    padding: 0;
+  }
+  .sider {
+    .logo {
+      display: block;
+      margin: 10px auto;
+    }
+  }
+}

@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+/* clearboth */
+._clearfix::after {
+  content: ' ';
+  display: block;
+  line-height: 0;
+  height: 0;
+  visibility: hidden;
+  clear: both;
+}
+/* 左右浮动 */
+._fl {
+  float: left;
+}
+._fr {
+  float: right;
+}
+/* flexbox */
+._flex {
+  display: -webkit-flex;
+  display: flex;
+}
+/* 垂直排列 */
+._flex_vertical {
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+/* 垂直居中 */
+._flex_v_center {
+  -webkit-align-items: center;
+  align-items: center;
+}
+/* 水平居中 */
+._flex_h_center {
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+/* 水平居右 */
+._flex_end {
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+}
+/* 水平两端对齐 */
+._flex_justify {
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+/* 水平均分 */
+._flex_space {
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+}
+/* 媒体查询 */
+._media {
+  @media screen and (min-width: 1601px) {
+    min-width: 1380px;
+  }
+  @media screen and (max-width: 1600px) {
+    min-width: 1280px;
+  }
+  @media screen and (max-width: 1200px) {
+    min-width: 1180px;
+  }
+}
+/* ### 滚动条样式 ### */
+.__scrollbar {
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #c1c1c1;
+    border-radius: 8px;
+  }
+}

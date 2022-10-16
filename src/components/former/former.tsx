@@ -106,7 +106,6 @@ const Fragment: FC<FormerProps> = ({
                 ? "请选择"
                 : "请输入"
             }${item?.label || ""}`,
-      allowClear: item?.allowClear,
       ...(item?.viewProps || {}),
     };
 

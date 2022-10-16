@@ -7,9 +7,12 @@
  * @param {callback} Function return count
  */
 export default (
-  { defaultCount = 60, millisec = 1000 } = {},
-  callback = (count = 0) => {}
-) => {
+  {
+    defaultCount = 60,
+    millisec = 1000,
+  }: { defaultCount?: number; millisec?: number } = {},
+  callback = (count: number = 0) => {}
+): { stop: () => void } => {
   let stop = false;
   const timer = (count) => {
     if (count && !stop) {

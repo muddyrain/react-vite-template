@@ -1,88 +1,51 @@
-import { useEffect, useState } from "react";
-import "./App.less";
-import axios from "axios";
-import { Block, Dialog, Drawer, Former, Tabler } from "./components";
-function App() {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    axios
-      .get("/api/list", {
-        params: {
-          pageSize: 10,
-          page: 1,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-      });
-  }, []);
-  // const [$form] = Former.useForm();
-  return (
-    <div className="App">
-      <h5>test Block Components</h5>
-      <Block>block test</Block>
-      <h5>test Dialog Components</h5>
-      <Dialog width={600}>哈哈哈</Dialog>
-      <h5>test Drawer Components</h5>
-      <Drawer width={600}>哈哈哈</Drawer>
-      <h5>test Drawer Components</h5>
-      <Former
-        datasource={[
-          {
-            rules: [],
-            key: "a",
-            label: "哈哈哈",
-            view: "Input",
-            viewProps: {
-              disabled: true,
-            },
-          },
-        ]}
-      />
-      <h5>test Drawer Components</h5>
-      <Tabler
-        columns={[
-          {
-            title: "哈哈",
-            dataIndex: "firstName",
-          },
-        ]}
-        dataSource={[
-          {
-            key: "1",
-            firstName: "John",
-            lastName: "Brown",
-            age: 32,
-            address: "New York No. 1 Lake Park",
-            tags: ["nice", "developer"],
-          },
-          {
-            key: "2",
-            firstName: "John",
-            lastName: "Brown",
-            age: 32,
-            address: "New York No. 1 Lake Park",
-            tags: ["nice", "developer"],
-          },
-        ]}
-        actions={[
-          {
-            confirm: "哈哈",
-            props: {
-              danger: true,
-            },
-            content: (e, i) => {
-              console.log("content", e, i);
-              return "1";
-            },
-            onClick: (e, i) => {
-              console.log(e, i);
-            },
-          },
-        ]}
-      />
-    </div>
-  );
-}
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
+import moment from "moment";
+import { ConfigProvider } from "antd";
+import zhCN from "antd/lib/locale/zh_CN";
+import Layouts, { routes } from "./layouts";
+import "moment/locale/zh-cn";
+import { RoutesProps } from "./layouts/config";
+import { ReactNode } from "react";
+import { Routes_DEFAULT_PATH } from "./constant";
+
+moment.locale("zh-cn");
+
+// 渲染路由
+const renderRoute = (datasource = []) => {
+  const list: ReactNode[] = [];
+  const recursion = (data: RoutesProps[] = []) => {
+    data.forEach((item: RoutesProps) => {
+      if (Array.isArray(item?.children)) {
+        recursion(item.children);
+      } else {
+        list.push(
+          <Route
+            key={item.path}
+            path={item.path}
+            element={
+              <Layouts routes={datasource} configuration={item}>
+                {item.element}
+              </Layouts>
+            }
+          />
+        );
+      }
+    });
+  };
+  recursion(datasource);
+  return list;
+};
+
+const App = () => (
+  <ConfigProvider locale={zhCN}>
+    <HashRouter>
+      <Routes>
+        {renderRoute(routes)}
+        <Route path="/" element={<Navigate to={Routes_DEFAULT_PATH} />} />
+        <Route path="/*" element={<Layouts.NotFound />} />
+      </Routes>
+    </HashRouter>
+  </ConfigProvider>
+);
 
 export default App;
