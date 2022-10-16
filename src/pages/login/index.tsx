@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { Button } from "antd";
 import { LOGO_DARK_PNG } from "@/assets";
 import baseApi from "@/api/baseApi";
 import styles from "./index.module.less";
 import { Former } from "@/components";
 
-const Fragment = () => {
+const Fragment: FC = () => {
   const [$form] = Former.useForm();
   const [processing, setProcessing] = useState(false);
   return (

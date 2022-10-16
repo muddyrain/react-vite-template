@@ -25,6 +25,7 @@ export interface TablerActionsProps {
 }
 interface TablerProps {
   className?: string;
+  rowKey?: string;
   columns?: TableColumnType<RecordType>[];
   dataSource?: RecordType[];
   fixed?: boolean;
@@ -88,6 +89,7 @@ Fragment.defaultProps = {
    * }, ...]
    */
   columns: [],
+  rowKey: "id",
   dataSource: [],
   fixed: false, // 是否标记滚动
   ordered: true, // 是否标记序号

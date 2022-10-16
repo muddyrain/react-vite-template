@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, FC } from "react";
 import { Button } from "antd";
 import { Title, Icon } from "@bees/ui";
 import Block from "@/components/block";
 import Former from "@/components/former";
 import { SEX } from "@/constant";
 
-const Fragment = () => {
+const Fragment: FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 1000);
+    setTimeout(() => setLoading(false), 500);
   }, []);
 
   return (
@@ -26,7 +26,10 @@ const Fragment = () => {
           {
             label: "输入框",
             key: "input",
-            view: "Input",
+            view: "DatePicker",
+            viewProps: {
+              size: "middle",
+            },
           },
           {
             label: "多选框",
