@@ -20,6 +20,7 @@ export type RecordType = { [key: string]: any };
 
 type viewtype = keyof typeof elements;
 type RegularsType = keyof typeof regulars;
+type RulesType = Omit<Rule, "type"> & { type: RegularsType };
 interface FormerItemProps {
   key?: string; // 关键字段
   label?: string; // 标题
@@ -28,8 +29,7 @@ interface FormerItemProps {
   initialValue?: any; // 初始值
   required?: boolean; // 是否必填
   requiredMsg?: string; // 必填时提示文案 => 请[填写|选择]${label} | requiredMsg
-  rules?: Rule[]; // 校验规则 => 校验规则 => [{ required, pattern, message, type, ... }, ...]
-  type?: RegularsType;
+  rules?: RulesType[]; // 校验规则 => 校验规则 => [{ required, pattern, message, type, ... }, ...]
   props?: FormItemProps; // 表单项 Props => { className, style, help, ... }
   view: viewtype; // 组件 => 'Input' | Element | Node
   viewProps?: elementsProps[viewtype]; // 组件 Props => {}
@@ -135,10 +135,9 @@ const Fragment: FC<FormerProps> = ({
           rules={[
             { required: item?.required, message: item?.requiredMsg },
             ...(item?.rules || []).map((item) => ({
-              ...(regulars[(item as FormerItemProps).type as RegularsType] ||
-                {}),
-              ...(item as FormerItemProps),
-              ...(regulars[(item as FormerItemProps).type as RegularsType] && {
+              ...(regulars[item.type as RegularsType] || {}),
+              ...item,
+              ...(regulars[item.type as RegularsType] && {
                 type: undefined,
               }),
             })),

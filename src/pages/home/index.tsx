@@ -26,7 +26,9 @@ const Fragment: FC = () => {
           {
             label: "输入框",
             key: "input",
-            view: "DatePicker",
+            view: "Input",
+            type: "integer",
+            rules: [{ type: "amount" }],
             viewProps: {
               size: "middle",
             },

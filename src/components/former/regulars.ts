@@ -1,5 +1,3 @@
-import { Rule } from "antd/lib/form";
-
 const regulars = {
   username: {
     pattern: /^[a-zA-Z][a-zA-Z0-9_]{3,16}$/,
