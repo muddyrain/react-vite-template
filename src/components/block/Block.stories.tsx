@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import Block from "./index";
+import Block from "./Block";
 
 export default {
   title: "components/Block",

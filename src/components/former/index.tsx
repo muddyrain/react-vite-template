@@ -1,9 +1,9 @@
 import { FC } from "react";
 import Fromer, { FormerProps, RecordType } from "./former";
 import { Form, FormInstance } from "antd";
-export type FormerComponent = FC<FormerProps> & {
+export type TypeComponent = FC<FormerProps> & {
   useForm: () => [FormInstance<RecordType>];
 };
-const TranFormer = Fromer as FormerComponent;
-TranFormer.useForm = Form.useForm;
-export default TranFormer;
+const TranComponent = Fromer as TypeComponent;
+TranComponent.useForm = Form.useForm;
+export default TranComponent;

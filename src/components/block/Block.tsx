@@ -3,7 +3,7 @@ import { Spin } from "antd";
 import styles from "./index.module.less";
 import { CommonComponentsProps } from "@/interface/commonComponentsProps";
 
-interface BlockProps extends CommonComponentsProps {
+export interface BlockProps extends CommonComponentsProps {
   /** 加载中 */
   loading?: boolean;
   /** 背景颜色 */

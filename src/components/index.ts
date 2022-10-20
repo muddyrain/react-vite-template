@@ -1,4 +1,4 @@
-import Block from "./block";
+import Block from "./block/Block";
 import Dialog from "./dialog";
 import Drawer from "./drawer";
 import Tabler from "./tabler";

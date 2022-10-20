@@ -1,8 +1,7 @@
 import React, { useState, useEffect, FC } from "react";
 import { Button } from "antd";
 import { Title, Icon } from "@bees/ui";
-import Block from "@/components/block";
-import Former from "@/components/former";
+import { Block, Former } from "@/components";
 import { SEX } from "@/constant";
 
 const Fragment: FC = () => {

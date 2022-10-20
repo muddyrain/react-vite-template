@@ -1,7 +1,7 @@
 import React, { useReducer, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Typography } from "antd";
-import Block from "@/components/block";
+import Block from "@/components/block/Block";
 import Tabler from "@/components/tabler";
 import styles from "./index.module.less";
 import { useModels } from "./models";

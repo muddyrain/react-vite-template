@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import { Modal, Button, ButtonProps, ModalProps } from "antd";
-import Confirm from "./confirm";
+import Confirm from "../confirm";
 import { SizeProps } from "@/interface/baseProps";
 import { CommonComponentsProps } from "@/interface/commonComponentsProps";
 
@@ -20,37 +20,37 @@ const procedureWidth = (width: SizeProps | number) => {
   }
 };
 
-interface DialogProps extends CommonComponentsProps {
-  /**标题 */
+export interface DialogProps extends CommonComponentsProps {
+  /** 标题 */
   title?: string;
-  /**宽度 */
+  /** 宽度 */
   width?: SizeProps | number;
-  /**打开按钮文字 */
+  /** 打开按钮文字 */
   openText?: React.ReactNode;
-  /**确定按钮文字 */
+  /** 确定按钮文字 */
   okText?: React.ReactNode;
-  /**取消按钮文字 */
+  /** 取消按钮文字 */
   cancelText?: React.ReactNode;
-  /**确定按钮配置项 */
+  /** 确定按钮配置项 */
   okButtonProps?: ButtonProps;
-  /**取消按钮配置项 */
+  /** 取消按钮配置项 */
   cancelButtonProps?: ButtonProps;
-  /**打开按钮配置项 */
+  /** 打开按钮配置项 */
   openButtonProps?: ButtonProps;
-  /**打开之前的操作 */
+  /** 打开之前的操作 */
   onOpen?: () => void;
-  /**点击确定之后的操作 hide:Function类型(手动关闭弹框) 返回值: boolean类型(是否自动关闭) */
+  /** 点击确定之后的操作 hide:Function类型(手动关闭弹框) 返回值: boolean类型(是否自动关闭) */
   onOk?: (hide: () => void) => boolean;
-  /**关闭之后的操作 */
+  /** 关闭之后的操作 */
   onCancel?: () => void;
-  /**关闭之前的操作 */
+  /** 关闭之前的操作 */
   afterClose?: () => void;
-  /**自定义footer */
+  /** 自定义footer */
   footer?: (close: () => void) => React.ReactNode | React.ReactNode | any;
-  /**自定义渲染打开按钮 */
+  /** 自定义渲染打开按钮 */
   renderOpenButton?: (int: () => void) => void;
 }
-const Dialog = ({
+const Dialog: FC<DialogProps> = ({
   className,
   style,
   title,
@@ -68,7 +68,7 @@ const Dialog = ({
   renderOpenButton,
   openButtonProps,
   openText,
-}: DialogProps) => {
+}) => {
   const [visible, setVisible] = useState(false);
 
   // 处理打开按钮
