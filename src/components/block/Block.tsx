@@ -16,7 +16,7 @@ export const Block: FC<BlockProps> = ({
   loading = false,
   className = "",
   style = {},
-  backgroundColor = "transparent",
+  backgroundColor = "#fff",
   onClick,
 }) => (
   <Spin spinning={loading}>
