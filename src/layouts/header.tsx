@@ -57,6 +57,13 @@ const Fragment: FC<HeaderProps> = ({ accountInfo, configuration }) => {
             <Dropdown
               overlay={
                 <Menu
+                  items={[
+                    {
+                      label: "退出登录",
+                      key: "logout",
+                      icon: <ExportOutlined />,
+                    },
+                  ]}
                   onClick={({ key }) => {
                     if (key === "logout") {
                       baseApi.Logout();
@@ -64,17 +71,13 @@ const Fragment: FC<HeaderProps> = ({ accountInfo, configuration }) => {
                       navigate("/login");
                     }
                   }}
-                >
-                  <Menu.Item key="logout" icon={<ExportOutlined />}>
-                    退出登录
-                  </Menu.Item>
-                </Menu>
+                />
               }
             >
-              <Space>
+              <span>
                 <Avatar>{accountInfo?.name}</Avatar>
                 <Text>{accountInfo?.name}</Text>
-              </Space>
+              </span>
             </Dropdown>
           ) : (
             <Button

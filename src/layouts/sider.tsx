@@ -59,7 +59,7 @@ const Fragment: FC<{
         ]}
         items={menuList}
         onClick={({ key }) => navigate(key)}
-      ></Menu>
+      />
     </Sider>
   );
 };
