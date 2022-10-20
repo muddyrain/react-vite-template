@@ -5,19 +5,21 @@ import { CommonComponentsProps } from "@/interface/commonComponentsProps";
 
 interface BlockProps extends CommonComponentsProps {
   loading?: boolean;
+  backgroundColor?: string;
   onClick?: React.MouseEventHandler<HTMLElement> | undefined;
 }
-const Fragment: FC<BlockProps> = ({
+const Block: FC<BlockProps> = ({
   children,
-  loading,
+  loading = false,
   className,
-  style,
+  style = {},
+  backgroundColor = "transparent",
   onClick,
 }) => (
   <Spin spinning={loading}>
     <section
       className={`${styles.block} ${className}`}
-      style={style}
+      style={{ backgroundColor, ...style }}
       onClick={onClick}
     >
       {children}
@@ -25,12 +27,8 @@ const Fragment: FC<BlockProps> = ({
   </Spin>
 );
 
-Fragment.defaultProps = {
-  children: undefined,
-  loading: false,
-  className: "",
-  style: {},
+Block.defaultProps = {
   onClick: () => {},
 };
 
-export default Fragment;
+export default Block;

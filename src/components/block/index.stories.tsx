@@ -11,4 +11,6 @@ export const Basic = Template.bind({});
 Basic.args = {
   loading: true,
   children: "我是内容",
+  style: { padding: "50px" },
+  backgroundColor: "#fff",
 };

@@ -21,6 +21,9 @@ const procedureWidth = (width: SizeProps | number) => {
 };
 
 interface DialogProps extends CommonComponentsProps {
+  /**
+   * 哈哈哈
+   */
   title?: string;
   onOpen?: () => void;
   okText?: React.ReactNode;
@@ -29,6 +32,7 @@ interface DialogProps extends CommonComponentsProps {
   okButtonProps?: ButtonProps;
   cancelButtonProps?: ButtonProps;
   openButtonProps?: ButtonProps;
+  /** (hide:() => void) => false <br />参数: hide:Function类型(手动关闭弹框) <br /> 返回值: boolean类型(是否自动关闭) */
   onOk?: (hide: () => void) => boolean;
   onCancel?: () => void;
   afterClose?: () => void;
@@ -36,7 +40,7 @@ interface DialogProps extends CommonComponentsProps {
   width?: SizeProps | number;
   renderOpenButton?: (int: () => void) => void;
 }
-const Fragment: FC<DialogProps> = ({
+const Dialog: FC<DialogProps> = ({
   className,
   style,
   title,
@@ -142,9 +146,9 @@ const Fragment: FC<DialogProps> = ({
   );
 };
 
-// Fragment.Confirm = Confirm;
+// Dialog.Confirm = Confirm;
 
-Fragment.defaultProps = {
+Dialog.defaultProps = {
   /* ### 按钮属性 ### */
   // visible: null, // 受控 => 开启 visible 为 Boolean 值时，所有 open 都将失效，等效于原 Modal
   openText: "打开",
@@ -167,4 +171,4 @@ Fragment.defaultProps = {
   children: undefined,
 };
 
-export default Fragment;
+export default Dialog;

@@ -23,6 +23,7 @@
     "@bees/ui": "git+https://gitee.com/public-cli/bees-ui.git",
     "@storybook/addon-actions": "^6.5.12",
     "@storybook/addon-essentials": "^6.5.12",
+    "@storybook/addon-info": "^5.3.21",
     "@storybook/addon-interactions": "^6.5.12",
     "@storybook/addon-links": "^6.5.12",
     "@storybook/builder-vite": "^0.2.4",
