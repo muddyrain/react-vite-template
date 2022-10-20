@@ -4,11 +4,11 @@ import styles from "./index.module.less";
 import { CommonComponentsProps } from "@/interface/commonComponentsProps";
 
 interface BlockProps extends CommonComponentsProps {
-  /**
-   * 加载中
-   */
+  /** 加载中 */
   loading?: boolean;
+  /** 背景颜色 */
   backgroundColor?: string;
+  /** 点击监听 */
   onClick?: React.MouseEventHandler<HTMLElement> | undefined;
 }
 export const Block: FC<BlockProps> = ({
@@ -16,6 +16,7 @@ export const Block: FC<BlockProps> = ({
   loading = false,
   className = "",
   style = {},
+  backgroundColor = "transparent",
   onClick,
 }) => (
   <Spin spinning={loading}>
@@ -29,7 +30,7 @@ export const Block: FC<BlockProps> = ({
   </Spin>
 );
 
-Fragment.defaultProps = {
+Block.defaultProps = {
   children: undefined,
   loading: false,
   className: "",

@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import Block from "./index";
 
 export default {
-  titile: "Block盒子",
+  title: "components/Block",
   component: Block,
 } as ComponentMeta<typeof Block>;
 
