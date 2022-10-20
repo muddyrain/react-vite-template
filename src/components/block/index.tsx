@@ -20,7 +20,7 @@ const Fragment: FC<BlockProps> = ({
       style={style}
       onClick={onClick}
     >
-      {children}
+      {!loading ? children : null}
     </section>
   </Spin>
 );

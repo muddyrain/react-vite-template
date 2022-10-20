@@ -14,7 +14,6 @@ const Fragment = () => {
   const { page, pageSize, updater, datalist, loading, total, list } = state;
   useEffect(() => {
     getList({ page, pageSize });
-    console.log(list);
   }, [updater, page, pageSize]);
 
   const query = (values = {}) => dispatch({ page: 1, ...values }); // 查询列表

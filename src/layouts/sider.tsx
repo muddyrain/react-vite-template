@@ -5,6 +5,7 @@ import { LOGO_PNG } from "@/assets";
 import styles from "./index.module.less";
 import { RoutesProps } from "./config";
 import { HEADER_LOGO_TEXT } from "@/constant";
+import { TransfromRoutesToMenusItems } from "@/utils/tools";
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -41,7 +42,8 @@ const Fragment: FC<{
   accountInfo: any;
 }> = ({ routes, configuration }) => {
   const navigate = useNavigate();
-
+  // 递归 routes
+  const menuList = TransfromRoutesToMenusItems(routes);
   return (
     <Sider theme="light" className={styles.sider} collapsed={false}>
       <div className={styles.logo}>
@@ -55,10 +57,9 @@ const Fragment: FC<{
           (configuration?.parentPath as string) ||
             (configuration?.path as string),
         ]}
+        items={menuList}
         onClick={({ key }) => navigate(key)}
-      >
-        {renderMenu(routes)}
-      </Menu>
+      ></Menu>
     </Sider>
   );
 };

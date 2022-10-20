@@ -17,7 +17,6 @@ export const useModels = (initialState: initialStateProps = {}) => {
   );
 
   const getList = async (params: any = {}) => {
-    console.log(params);
     dispatch({ loading: true });
     const DATA = await baseApi.List(params);
     dispatch({

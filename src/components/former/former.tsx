@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FC } from "react";
+import React, { useState, useEffect, FC, useRef } from "react";
 import {
   Form,
   Row,
@@ -81,14 +81,13 @@ const Fragment: FC<FormerProps> = ({
   const [initForm] = Form.useForm();
   const $form = form || initForm;
   const [formdata, setFormdata] = useState<RecordType>({}); // 记录更新值
-  const effectdata = $form?.getFieldsValue();
   useEffect(() => {
     const values = $form.getFieldsValue();
     const result = _.isEqual(values, formdata);
     if (!result) {
       setFormdata(values);
     }
-  }, [effectdata]);
+  }, [formdata]);
 
   const colSpan = 24 / (column || 3);
 
@@ -226,7 +225,6 @@ const Fragment: FC<FormerProps> = ({
       }}
     >
       <>
-        {" "}
         <Row gutter={gutter}>
           {(() => {
             if (datasourceType === "[object Function]") {
