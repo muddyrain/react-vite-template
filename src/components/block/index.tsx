@@ -4,14 +4,17 @@ import styles from "./index.module.less";
 import { CommonComponentsProps } from "@/interface/commonComponentsProps";
 
 interface BlockProps extends CommonComponentsProps {
+  /**
+   * 加载中
+   */
   loading?: boolean;
   onClick?: React.MouseEventHandler<HTMLElement> | undefined;
 }
-const Fragment: FC<BlockProps> = ({
-  children,
-  loading,
-  className,
-  style,
+export const Block: FC<BlockProps> = ({
+  children = "",
+  loading = false,
+  className = "",
+  style = {},
   onClick,
 }) => (
   <Spin spinning={loading}>
@@ -25,7 +28,7 @@ const Fragment: FC<BlockProps> = ({
   </Spin>
 );
 
-Fragment.defaultProps = {
+Block.defaultProps = {
   children: undefined,
   loading: false,
   className: "",
@@ -33,4 +36,4 @@ Fragment.defaultProps = {
   onClick: () => {},
 };
 
-export default Fragment;
+export default Block;

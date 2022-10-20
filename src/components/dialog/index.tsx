@@ -21,6 +21,7 @@ const procedureWidth = (width: SizeProps | number) => {
 };
 
 interface DialogProps extends CommonComponentsProps {
+  /**标题 */
   title?: string;
   onOpen?: () => void;
   okText?: React.ReactNode;
@@ -36,7 +37,7 @@ interface DialogProps extends CommonComponentsProps {
   width?: SizeProps | number;
   renderOpenButton?: (int: () => void) => void;
 }
-const Fragment: FC<DialogProps> = ({
+const Fragment = ({
   className,
   style,
   title,
@@ -54,7 +55,7 @@ const Fragment: FC<DialogProps> = ({
   renderOpenButton,
   openButtonProps,
   openText,
-}) => {
+}: DialogProps) => {
   const [visible, setVisible] = useState(false);
 
   // 处理打开按钮
