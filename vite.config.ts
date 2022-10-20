@@ -1,7 +1,7 @@
 import { ConfigEnv, UserConfigExport } from "vite";
 import react from "@vitejs/plugin-react";
 import { viteMockServe } from "vite-plugin-mock";
-
+import path from "path";
 // https://vitejs.dev/config/
 export default ({ command }: ConfigEnv): UserConfigExport => {
   // command 环境:  "build" | "serve"
@@ -15,10 +15,10 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         watchFiles: true, // 开启对mock文件的监听
       }),
     ],
-    resolve:{
-      alias:{
-        '@':'/src/',      //格式一定要写对喽不然没有代码提示或者报错
-      }
-    }
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "src"),
+      },
+    },
   };
 };

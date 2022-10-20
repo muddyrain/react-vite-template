@@ -8,6 +8,7 @@ interface BlockProps extends CommonComponentsProps {
    * 加载中
    */
   loading?: boolean;
+  backgroundColor?: string;
   onClick?: React.MouseEventHandler<HTMLElement> | undefined;
 }
 export const Block: FC<BlockProps> = ({
@@ -20,15 +21,15 @@ export const Block: FC<BlockProps> = ({
   <Spin spinning={loading}>
     <section
       className={`${styles.block} ${className}`}
-      style={style}
+      style={{ backgroundColor, ...style }}
       onClick={onClick}
     >
-      {!loading ? children : null}
+      {children}
     </section>
   </Spin>
 );
 
-Block.defaultProps = {
+Fragment.defaultProps = {
   children: undefined,
   loading: false,
   className: "",
