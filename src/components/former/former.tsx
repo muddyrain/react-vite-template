@@ -22,7 +22,7 @@ type viewtype = keyof typeof elements;
 type RegularsType = keyof typeof regulars;
 type RulesType = Omit<Rule, "type"> & { type: RegularsType };
 interface FormerItemProps {
-  key?: string; // 关键字段
+  key: string; // 关键字段
   label?: string; // 标题
   hide?: boolean | ((record: RecordType, index: number) => boolean); // 是否隐藏保留 key 关键字的隐藏状态 => Boolean; default: null;
   visible?: boolean | ((record: RecordType, index: number) => boolean); // 是否显示(销毁 key 关键字的隐藏状态) => Boolean
@@ -42,22 +42,36 @@ interface FormerItemProps {
 export interface FormerProps
   extends CommonComponentsProps,
     Pick<FormProps, "onFieldsChange" | "onValuesChange"> {
+  /** formProps 配置项 */
   formProps?: FormProps;
+  /** 经 Former.useForm() 创建的 form 控制实例，不提供时会自动创建 */
   form?: FormInstance<RecordType>;
+  /** form数据配置 */
   datasource?: FormerItemProps[] | ((value: RecordType) => FormerItemProps[]);
+  /** label 标签布局(24栅格) */
   labelCol?: number;
+  /** 内容包装 布局(24栅格) */
   wrapperCol?: number;
+  /** 间隔大小 */
   gutter?: number;
+  /** 一排几个 */
   column?: number;
+  /** 提交表单时的操作 参数: values 表单项 */
   onSubmit?: (values: object) => void;
+  /** 重置表单时的操作 参数: values 表单项 */
   onReset?: (values: object | undefined) => void;
+  /** 提交按钮文字 */
   submitText?: React.ReactNode;
+  /** 重置按钮文字 */
   resetText?: React.ReactNode;
+  /** 提交按钮配置项 */
   submitProps?: ButtonProps;
+  /** 重置按钮配置项 */
   resetProps?: ButtonProps;
+  /** 自定义渲染操作 */
   renderActions?: ((submit: () => void, reset: () => void) => void) | null;
 }
-const Fragment: FC<FormerProps> = ({
+const Former: FC<FormerProps> = ({
   formProps,
   form,
   datasource,
@@ -266,7 +280,7 @@ const Fragment: FC<FormerProps> = ({
   );
 };
 
-Fragment.defaultProps = {
+Former.defaultProps = {
   formProps: {},
   className: "",
   style: {},
@@ -306,4 +320,4 @@ Fragment.defaultProps = {
   renderActions: null, // 自定义操作行，优先级高。 => (submit = () => { }, reset = () => { }) => { }, // return Node;
 };
 
-export default Fragment;
+export default Former;

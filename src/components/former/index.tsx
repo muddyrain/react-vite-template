@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Fromer, { FormerProps, RecordType } from "./former";
+import Fromer, { FormerProps, RecordType } from "./Former";
 import { Form, FormInstance } from "antd";
 export type TypeComponent = FC<FormerProps> & {
   useForm: () => [FormInstance<RecordType>];

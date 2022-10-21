@@ -21,11 +21,32 @@ const Fragment: FC = () => {
         wrapperCol={16}
         gutter={0}
         column={3}
+        onSubmit={(e) => {
+          console.log(e);
+        }}
         datasource={({ checks }) => [
+          {
+            label: "上传照片",
+            key: "upload-image",
+            required: true,
+            view: "UploaderImage",
+            viewProps: {
+              returnFormatter(response, file) {
+                return "11";
+              },
+            },
+          },
+          {
+            label: "上传文件",
+            key: "upload",
+            required: true,
+            view: "UploaderFile",
+          },
           {
             label: "输入框",
             key: "input",
             view: "Input",
+            required: true,
             type: "integer",
             rules: [{ type: "amount" }],
             viewProps: {
@@ -35,6 +56,7 @@ const Fragment: FC = () => {
           {
             label: "多选框",
             key: "checks",
+            required: true,
             view: "CheckboxGroup",
             viewProps: {
               options: [

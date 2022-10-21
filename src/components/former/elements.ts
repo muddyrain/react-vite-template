@@ -1,19 +1,26 @@
+import UploaderImage, { UploaderImageProps } from "../uploader/UploaderImage";
+import UploaderFile, { UploaderFileProps } from "../uploader/UploaderFile";
 import {
   Select,
   Input,
   Radio,
+  Switch,
+  SwitchProps,
   Checkbox,
   DatePicker,
   Cascader,
+  TimePicker,
   TreeSelect,
   InputProps,
   SelectProps,
+  TimePickerProps,
   DatePickerProps,
   CheckboxProps,
   CascaderProps,
   RadioProps,
   TreeSelectProps,
   RadioGroupProps,
+  UploadProps,
 } from "antd";
 import { CheckboxGroupProps } from "antd/lib/checkbox";
 import { MonthPickerProps, RangePickerProps } from "antd/lib/date-picker";
@@ -30,10 +37,14 @@ const elements = {
   Password,
   TextArea,
   Select,
+  Switch,
   DatePicker,
+  TimePicker,
   MonthPicker,
   RangePicker,
   Checkbox,
+  UploaderImage,
+  UploaderFile,
   CheckboxGroup,
   Cascader,
   Radio,
@@ -44,9 +55,14 @@ export default elements;
 
 export type elementsProps = {
   Input: InputProps;
+  Upload: UploadProps;
   Password: PasswordProps;
   TextArea: TextAreaProps;
   Select: SelectProps;
+  UploaderImage: UploaderImageProps;
+  UploaderFile: UploaderFileProps;
+  Switch: SwitchProps;
+  TimePicker: TimePickerProps;
   DatePicker: DatePickerProps;
   MonthPicker: MonthPickerProps;
   RangePicker: RangePickerProps;
