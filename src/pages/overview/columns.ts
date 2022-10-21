@@ -1,4 +1,4 @@
-import { RecordType } from "@/components/tabler";
+import { RecordType } from "@/components/tabler/Tabler";
 import { SEX } from "@/constant";
 import { TableColumnType } from "antd";
 

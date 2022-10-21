@@ -1,13 +1,7 @@
 /* eslint-disable no-empty-function */
 /* eslint-disable no-unused-vars */
 import React, { FC } from "react";
-import {
-  ButtonProps,
-  PaginationProps,
-  Table,
-  TableColumnType,
-  TableProps,
-} from "antd";
+import { ButtonProps, PaginationProps, Table, TableColumnType } from "antd";
 import styles from "./index.module.less";
 import handles from "./handles";
 export type RecordType = object;
@@ -23,21 +17,32 @@ export interface TablerActionsProps {
     | ((record: RecordType, index: number) => React.ReactNode);
   onClick?: (record: RecordType, index: number) => void;
 }
-interface TablerProps {
+export interface TablerProps {
+  /** 样式名 */
   className?: string;
+  /** 表格行 key 的取值 */
   rowKey?: string;
+  /** 表格列的配置描述 */
   columns?: TableColumnType<RecordType>[];
+  /** 数据源 */
   dataSource?: RecordType[];
+  /** 是否标记滚动 */
   fixed?: boolean;
+  /** 是否标记序号 */
   ordered?: boolean;
+  /** 操作栏的宽度 */
   actionsWidth?: number | string | undefined;
+  /** 操作栏数据 */
   actions?: TablerActionsProps[];
+  /** 分页 */
   pagination?: PaginationProps;
+  /** 监听分页变化 */
   onPageChange?: (obj: { page: number; size: number }) => void;
+  /** 操作栏配置项 */
   actionsProps?: TableColumnType<RecordType>;
 }
 
-const Fragment: FC<TablerProps> = ({
+const Tabler: FC<TablerProps> = ({
   className,
   columns,
   dataSource,
@@ -77,7 +82,7 @@ const Fragment: FC<TablerProps> = ({
   );
 };
 
-Fragment.defaultProps = {
+Tabler.defaultProps = {
   className: "",
   /**
    * @param {columns} Array<Object>
@@ -111,4 +116,4 @@ Fragment.defaultProps = {
   onPageChange: ({ page = 1, size = 10 }) => null,
 };
 
-export default Fragment;
+export default Tabler;

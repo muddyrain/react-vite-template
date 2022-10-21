@@ -1,6 +1,6 @@
 import React from "react";
-import utils from "@/utils";
-import utilsTest from "@/utils/test";
+import utils from "../../utils";
+import utilsTest from "../../utils/test";
 import {
   Button,
   Space,
@@ -12,7 +12,7 @@ import {
   PaginationProps,
 } from "antd";
 import styles from "./index.module.less";
-import { RecordType, TablerActionsProps } from ".";
+import { RecordType, TablerActionsProps } from "./Tabler";
 
 // 是否隐藏
 const procedureColumnVisible = (item: TablerActionsProps) => {
