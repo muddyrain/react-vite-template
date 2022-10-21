@@ -1,12 +1,14 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import Dialog from "./Dialog";
+import Component from "./Dialog";
 
 export default {
-  title: "components/Dialog",
-  component: Dialog,
-} as ComponentMeta<typeof Dialog>;
+  title: "components/Dialog(弹框)",
+  component: Component,
+} as ComponentMeta<typeof Component>;
 
-const Template: ComponentStory<typeof Dialog> = (args) => <Dialog {...args} />;
+const Template: ComponentStory<typeof Component> = (args) => (
+  <Component {...args} />
+);
 
 export const Basic = Template.bind({});
 Basic.args = {

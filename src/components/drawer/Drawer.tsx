@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Drawer, Button, ButtonProps } from "antd";
+import { Drawer as AntDrawer, Button, ButtonProps } from "antd";
 import { Align } from "@bees/ui";
 import styles from "./index.module.less";
 import { CommonComponentsProps } from "@/interface/commonComponentsProps";
@@ -64,7 +64,7 @@ export interface DrawerProps extends CommonComponentsProps {
     close: () => void
   ) => React.ReactNode | React.ReactNode | any;
 }
-const Fragment: FC<DrawerProps> = ({
+const Drawer: FC<DrawerProps> = ({
   openText,
   openProps,
   title,
@@ -125,7 +125,7 @@ const Fragment: FC<DrawerProps> = ({
   return (
     <>
       {procedureOpenButton()}
-      <Drawer
+      <AntDrawer
         visible={visible}
         title={title}
         destroyOnClose={destroyOnClose}
@@ -214,12 +214,12 @@ const Fragment: FC<DrawerProps> = ({
         {(cancelText || okText || footerRender) && (
           <div className={styles.block} />
         )}
-      </Drawer>
+      </AntDrawer>
     </>
   );
 };
 
-Fragment.defaultProps = {
+Drawer.defaultProps = {
   renderOpenButton: undefined,
   openText: "打开",
   openProps: {},
@@ -251,4 +251,4 @@ Fragment.defaultProps = {
   footerRender: undefined, // (close) => Element, // null
 };
 
-export default Fragment;
+export default Drawer;

@@ -1,12 +1,14 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import Block from "./Block";
+import Component from "./Block";
 
 export default {
-  title: "components/Block",
-  component: Block,
-} as ComponentMeta<typeof Block>;
+  title: "components/Block(盒子)",
+  component: Component,
+} as ComponentMeta<typeof Component>;
 
-const Template: ComponentStory<typeof Block> = (args) => <Block {...args} />;
+const Template: ComponentStory<typeof Component> = (args) => (
+  <Component {...args} />
+);
 export const Basic = Template.bind({});
 Basic.args = {
   loading: true,

@@ -1,12 +1,14 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import Drawer from "./Drawer";
+import Component from "./Drawer";
 
 export default {
-  title: "components/Drawer",
-  component: Drawer,
-} as ComponentMeta<typeof Drawer>;
+  title: "components/Drawer(抽屉)",
+  component: Component,
+} as ComponentMeta<typeof Component>;
 
-const Template: ComponentStory<typeof Drawer> = (args) => <Drawer {...args} />;
+const Template: ComponentStory<typeof Component> = (args) => (
+  <Component {...args} />
+);
 export const Basic = Template.bind({});
 Basic.args = {
   children: "我是内容",
