@@ -60,16 +60,16 @@ Basic.args = {
       view: "RangePicker",
     },
     {
-      label: "上传照片",
-      key: "upload",
-      required: true,
-      view: "UploaderImage",
-    },
-    {
       label: "上传文件",
-      key: "upload",
+      key: "UploaderFile",
       required: true,
       view: "UploaderFile",
+    },
+    {
+      label: "上传照片",
+      key: "UploaderImage",
+      required: true,
+      view: "UploaderImage",
       viewProps: {
         onSubmit: (e) => {
           console.log("UploaderFile", e);

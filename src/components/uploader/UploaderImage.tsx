@@ -34,7 +34,11 @@ const Uploader: FC<UploaderImageProps> = ({
           returnFormatter ? returnFormatter(response, info.file) : response,
           info.file
         );
-        setImageUrl(response.data as string);
+        setImageUrl(
+          returnFormatter
+            ? (returnFormatter(response, info.file) as string)
+            : (response.data as string)
+        );
         break;
       case "error":
         setLoading(false);

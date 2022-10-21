@@ -13,7 +13,7 @@ export interface UploaderFileProps {
   actionUrl?: string;
   list?: FileListType;
   defaultFileList?: FileListType;
-  onSubmit?: (fileList: FileListType) => void;
+  onSuccess?: (fileList: FileListType) => void;
   onRemove?: (file: UploadFile<any>, fileList: FileListType) => void;
   onChange?: (e: any) => void;
   returnFormatter?: (response: any, file: UploadFile<any>) => any;
@@ -22,7 +22,7 @@ const UploaderFile: FC<UploaderFileProps> = ({
   openText,
   openButtonProps,
   actionUrl,
-  onSubmit,
+  onSuccess,
   list = [],
   onChange,
   onRemove,
@@ -47,7 +47,7 @@ const UploaderFile: FC<UploaderFileProps> = ({
         });
         onChange?.(formatterList);
         setFileList(newFileList);
-        onSubmit?.(formatterList);
+        onSuccess?.(formatterList);
         setLoading(false);
         break;
       case "error":
