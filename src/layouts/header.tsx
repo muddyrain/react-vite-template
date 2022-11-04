@@ -76,7 +76,7 @@ const Fragment: FC<HeaderProps> = ({ accountInfo, configuration }) => {
             >
               <span>
                 <Avatar>{accountInfo?.name}</Avatar>
-                <Text>{accountInfo?.name}</Text>
+                <Text className="ml-1">{accountInfo?.name}</Text>
               </span>
             </Dropdown>
           ) : (
