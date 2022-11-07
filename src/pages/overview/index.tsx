@@ -11,12 +11,12 @@ const { Title } = Typography;
 const Fragment = () => {
   const navigate = useNavigate();
   const { state, getList, dispatch } = useModels();
-  const { page, pageSize, updater, datalist, loading, total, list } = state;
+  const { pageNum, pageSize, updater, datalist, loading, total, list } = state;
   useEffect(() => {
-    getList({ page, pageSize });
-  }, [updater, page, pageSize]);
+    getList({ pageNum, pageSize });
+  }, [updater, pageNum, pageSize]);
 
-  const query = (values = {}) => dispatch({ page: 1, ...values }); // 查询列表
+  const query = (values = {}) => dispatch({ pageNum: 1, ...values }); // 查询列表
 
   return (
     <Block className={styles.container} loading={loading}>
@@ -41,7 +41,7 @@ const Fragment = () => {
             },
           },
         ]}
-        pagination={{ current: page, pageSize: pageSize, total }}
+        pagination={{ current: pageNum, pageSize: pageSize, total }}
         onPageChange={({ page, size }) => query({ page, pageSize: size })}
       />
     </Block>
