@@ -26,6 +26,8 @@ export interface TablerProps {
   columns?: TableColumnType<RecordType>[];
   /** 数据源 */
   dataSource?: RecordType[];
+  /** 表格加载中 */
+  loading?: boolean;
   /** 是否标记滚动 */
   fixed?: boolean;
   /** 是否标记序号 */
