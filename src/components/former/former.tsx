@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FC, useRef } from "react";
+import React, { useState, useEffect, FC } from "react";
 import {
   Form,
   Row,
@@ -31,7 +31,7 @@ interface FormerItemProps {
   requiredMsg?: string; // 必填时提示文案 => 请[填写|选择]${label} | requiredMsg
   rules?: RulesType[]; // 校验规则 => 校验规则 => [{ required, pattern, message, type, ... }, ...]
   props?: FormItemProps; // 表单项 Props => { className, style, help, ... }
-  view: viewtype; // 组件 => 'Input' | Element | Node
+  view: viewtype | JSX.Element; // 组件 => 'Input' | Element | Node
   viewProps?: elementsProps[viewtype]; // 组件 Props => {}
   onlyEntryNumber?: boolean; // 仅支持输入数字
   width?: number; // 宽度 => 220
