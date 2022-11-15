@@ -1,7 +1,13 @@
 /* eslint-disable no-empty-function */
 /* eslint-disable no-unused-vars */
 import React, { FC } from "react";
-import { ButtonProps, PaginationProps, Table, TableColumnType } from "antd";
+import {
+  ButtonProps,
+  PaginationProps,
+  Table,
+  TableColumnType,
+  TableProps,
+} from "antd";
 import styles from "./index.module.less";
 import handles from "./handles";
 export type RecordType = object;
@@ -17,7 +23,7 @@ export interface TablerActionsProps {
     | ((record: RecordType, index: number) => React.ReactNode);
   onClick?: (record: RecordType, index: number) => void;
 }
-export interface TablerProps {
+export interface TablerProps extends TableProps<any> {
   /** 样式名 */
   className?: string;
   /** 表格行 key 的取值 */
