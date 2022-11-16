@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Upload } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { REQUEST_URL } from "../../constant";
@@ -8,12 +8,17 @@ export interface UploaderImageProps {
   defaultUrl?: string;
   onChange?: (response: any, file: UploadFile<any>) => void;
   returnFormatter?: (response: any, file: UploadFile<any>) => any;
+  value?: any;
 }
 const Uploader: FC<UploaderImageProps> = ({
   defaultUrl = "/file/uploadFile",
   returnFormatter,
   onChange,
+  value,
 }) => {
+  useEffect(() => {
+    setImageUrl(value);
+  }, [value]);
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const uploadButton = (
