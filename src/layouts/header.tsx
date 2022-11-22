@@ -14,7 +14,7 @@ import { LeftOutlined, ExportOutlined } from "@ant-design/icons";
 import baseApi from "@/api/baseApi";
 import styles from "./index.module.less";
 import { FC } from "react";
-import { RoutesProps } from "./config";
+import { RoutesProps } from "@/router/interface";
 
 const { Header } = Layout;
 const { Title, Text } = Typography;

@@ -1,10 +1,11 @@
-import React from "react";
 import { Icon } from "@bees/ui";
 import Home from "@/pages/home";
 import Login from "@/pages/login";
 import Overview from "@/pages/overview";
+import SystemSettings from "@/pages/system-settings";
 import Ongoing from "@/pages/project-management/ongoing";
 import Delivered from "@/pages/project-management/delivered";
+import { RoutesProps } from "./interface";
 
 /**
  * @param {String} path 同作 key 用，保证所在有层级中的唯一性
@@ -15,20 +16,6 @@ import Delivered from "@/pages/project-management/delivered";
  * @param {Boolean} needLogin 登录验证拦截 => false 无需验证拦截、true 开启验证拦截，默认：true
  * @param {Boolean} parentPath 父路径
  */
-export interface RoutesProps {
-  name?: string;
-  path?: string;
-  pure?: boolean;
-  hideMenu?: boolean;
-  style?: React.CSSProperties | undefined;
-  breadcrumb?: { name?: string; link?: string; href?: string; path?: string }[];
-  needLogin?: string;
-  parentPath?: string;
-  element?: React.ReactNode;
-  icon?: React.ReactNode;
-  children?: RoutesProps[];
-  auths?: string[];
-}
 const routes: RoutesProps[] = [
   {
     name: "登录",
@@ -48,6 +35,44 @@ const routes: RoutesProps[] = [
     name: "概览",
     path: "/overview",
     element: <Overview />,
+  },
+  {
+    name: "系统设置",
+    path: "/system-settings",
+    children: [
+      {
+        name: "角色管理",
+        path: "/role-management",
+        element: <SystemSettings.RoleManagement />,
+      },
+      {
+        name: "权限配置",
+        path: "/permission-quota",
+        parentPath: "/role-management",
+        hideMenu: true,
+        element: <SystemSettings.PermissionQuota />,
+      },
+      {
+        name: "菜单管理",
+        path: "/menu-management",
+        element: <SystemSettings.MenuManagement />,
+      },
+      {
+        name: "组织管理",
+        path: "/organizational-management",
+        element: <SystemSettings.OrganizationalManagement />,
+      },
+      {
+        name: "用户管理",
+        path: "/user-management",
+        element: <SystemSettings.UserManagement />,
+      },
+      {
+        name: "系统日志",
+        path: "/log-management",
+        element: <SystemSettings.LogManagement />,
+      },
+    ],
   },
   {
     icon: <Icon type="file-text" />,

@@ -1,5 +1,6 @@
 import UploaderImage, { UploaderImageProps } from "../uploader/UploaderImage";
 import UploaderFile, { UploaderFileProps } from "../uploader/UploaderFile";
+import SelectSearch, { SelectSearchProps } from "../selectSearch";
 import {
   Select,
   Input,
@@ -22,9 +23,10 @@ import {
   RadioGroupProps,
   UploadProps,
 } from "antd";
-import { CheckboxGroupProps } from "antd/lib/checkbox";
-import { MonthPickerProps, RangePickerProps } from "antd/lib/date-picker";
-import { PasswordProps, TextAreaProps } from "antd/lib/input";
+
+import { PasswordProps, TextAreaProps } from "antd/es/input";
+import { MonthPickerProps, RangePickerProps } from "antd/es/date-picker";
+import { CheckboxGroupProps } from "antd/es/checkbox";
 
 const { Password, TextArea } = Input;
 const { MonthPicker, RangePicker } = DatePicker;
@@ -33,6 +35,7 @@ const CheckboxGroup = Checkbox.Group;
 
 // 组件注册
 const elements = {
+  SelectSearch,
   Input,
   Password,
   TextArea,
@@ -72,4 +75,5 @@ export type elementsProps = {
   Radio: RadioProps;
   TreeSelect: TreeSelectProps;
   RadioGroup: RadioGroupProps;
+  SelectSearch: SelectSearchProps;
 };

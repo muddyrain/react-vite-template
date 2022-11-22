@@ -1,6 +1,6 @@
 import Layout, { LayoutProps } from "./layout";
 import NotFound from "./not-found";
-import config from "./config";
+import config from "@/router";
 
 interface CompoundedComponent
   extends React.ForwardRefExoticComponent<LayoutProps> {

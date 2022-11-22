@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Layout, Menu } from "antd";
 import { LOGO_PNG } from "@/assets";
 import styles from "./index.module.less";
-import { RoutesProps } from "./config";
+import { RoutesProps } from "@/router/interface";
 import { HEADER_LOGO_TEXT } from "@/constant";
 import { TransfromRoutesToMenusItems } from "@/utils/tools";
 

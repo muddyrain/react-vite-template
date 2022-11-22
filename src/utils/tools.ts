@@ -1,5 +1,5 @@
-import { RoutesProps } from "@/layouts/config";
-import { MenuItemType } from "antd/lib/menu/hooks/useItems";
+import { RoutesProps } from "@/router/interface";
+import { MenuItemType } from "rc-menu/lib/interface";
 
 const recursionList = (list: RoutesProps[]) => {
   return list.map((item: RoutesProps) => {

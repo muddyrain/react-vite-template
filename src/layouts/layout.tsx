@@ -2,7 +2,7 @@ import React, { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Layout } from "antd";
 import styles from "./index.module.less";
-import { RoutesProps } from "./config";
+import { RoutesProps } from "@/router/interface";
 import Header from "./header";
 import Footer from "./footer";
 import Sider from "./sider";

@@ -4,7 +4,7 @@ import { ConfigProvider } from "antd";
 import zhCN from "antd/locale/zh_CN";
 import Layouts, { routes } from "./layouts";
 import "moment/locale/zh-cn";
-import { RoutesProps } from "./layouts/config";
+import { RoutesProps } from "@/router/interface";
 import { ReactNode } from "react";
 import { Routes_DEFAULT_PATH } from "./constant";
 

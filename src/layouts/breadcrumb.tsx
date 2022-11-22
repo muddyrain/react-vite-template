@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Random } from "mockjs";
 import { Breadcrumb, Typography } from "antd";
 import styles from "./index.module.less";
-import { RoutesProps } from "./config";
+import { RoutesProps } from "@/router/interface";
 
 const { Link } = Typography;
 
