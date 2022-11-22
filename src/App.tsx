@@ -1,7 +1,7 @@
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import moment from "moment";
 import { ConfigProvider } from "antd";
-import zhCN from "antd/lib/locale/zh_CN";
+import zhCN from "antd/locale/zh_CN";
 import Layouts, { routes } from "./layouts";
 import "moment/locale/zh-cn";
 import { RoutesProps } from "./layouts/config";

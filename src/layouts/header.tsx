@@ -55,24 +55,22 @@ const Fragment: FC<HeaderProps> = ({ accountInfo, configuration }) => {
         <Col>
           {accountInfo?.token ? (
             <Dropdown
-              overlay={
-                <Menu
-                  items={[
-                    {
-                      label: "退出登录",
-                      key: "logout",
-                      icon: <ExportOutlined />,
-                    },
-                  ]}
-                  onClick={({ key }) => {
-                    if (key === "logout") {
-                      baseApi.Logout();
-                      window.sessionStorage.removeItem("accountInfo");
-                      navigate("/login");
-                    }
-                  }}
-                />
-              }
+              menu={{
+                items: [
+                  {
+                    label: "退出登录",
+                    key: "logout",
+                    icon: <ExportOutlined />,
+                  },
+                ],
+                onClick: ({ key }) => {
+                  if (key === "logout") {
+                    baseApi.Logout();
+                    window.sessionStorage.removeItem("accountInfo");
+                    navigate("/login");
+                  }
+                },
+              }}
             >
               <span>
                 <Avatar>{accountInfo?.name}</Avatar>

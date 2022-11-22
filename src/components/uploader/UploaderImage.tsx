@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from "react";
-import { Upload } from "antd";
+import { Upload, UploadFile } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { REQUEST_URL } from "../../constant";
-import { HttpRequestHeader, UploadFile } from "antd/lib/upload/interface";
+import { HttpRequestHeader } from "antd/es/upload/interface";
 
 export interface UploaderImageProps {
   defaultUrl?: string;
