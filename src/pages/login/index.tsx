@@ -8,6 +8,22 @@ import { Former } from "@/components";
 const Fragment: FC = () => {
   const [$form] = Former.useForm();
   const [processing, setProcessing] = useState(false);
+  const handleSubmit = () => {
+    $form.validateFields().then((values) => {
+      setProcessing(true);
+      baseApi
+        .Login(values)
+        .then((DATA) => {
+          if (DATA?.token) {
+            window.sessionStorage.setItem("accountInfo", JSON.stringify(DATA));
+            window.location.href = "/";
+          }
+        })
+        .finally(() => {
+          setProcessing(false);
+        });
+    });
+  };
   return (
     <section className={styles.container}>
       <div className={styles.former}>
@@ -28,6 +44,11 @@ const Fragment: FC = () => {
               initialValue: "admin",
               required: true,
               view: "Input",
+              viewProps: {
+                onKeyDown: ({ keyCode }) => {
+                  if (keyCode === 13) handleSubmit();
+                },
+              },
             },
             {
               label: "密码",
@@ -35,6 +56,11 @@ const Fragment: FC = () => {
               initialValue: "admin",
               required: true,
               view: "Password",
+              viewProps: {
+                onKeyDown: ({ keyCode }) => {
+                  if (keyCode === 13) handleSubmit();
+                },
+              },
             },
           ]}
         />
@@ -44,23 +70,7 @@ const Fragment: FC = () => {
           block
           loading={processing}
           onClick={() => {
-            $form.validateFields().then((values) => {
-              setProcessing(true);
-              baseApi
-                .Login(values)
-                .then((DATA) => {
-                  if (DATA?.token) {
-                    window.sessionStorage.setItem(
-                      "accountInfo",
-                      JSON.stringify(DATA)
-                    );
-                    window.location.href = "/";
-                  }
-                })
-                .finally(() => {
-                  setProcessing(false);
-                });
-            });
+            handleSubmit();
           }}
         >
           登录
