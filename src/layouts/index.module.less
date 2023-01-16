@@ -2,7 +2,22 @@
 
 .layout {
   height: 100vh;
+  min-width: 1380px;
   .header {
+    .logo {
+      span {
+        font-size: 18px;
+      }
+      img {
+        width: 30px;
+        margin-right: 10px;
+      }
+      padding: 0 10px;
+      display: flex;
+      height: 50px;
+      align-items: center;
+      justify-content: center;
+    }
     background: #fff;
     height: 50px;
     line-height: 50px;
@@ -10,6 +25,9 @@
     .title {
       margin: 0;
     }
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
   }
   .breadcrumb {
     padding: 16px;
@@ -27,8 +45,10 @@
       }
       height: 100%;
       overflow: hidden;
-      padding: 16px 16px 0;
+      padding: 16px 16px;
     }
+    width: 100%;
+    overflow: hidden;
     height: calc(100vh - 50px - 38px);
   }
   .footer {
@@ -40,19 +60,6 @@
     padding: 0;
   }
   .sider {
-    .logo {
-      span {
-        font-size: 18px;
-      }
-      img {
-        width: 30px;
-        margin-right: 10px;
-      }
-      padding: 0 10px;
-      display: flex;
-      height: 50px;
-      align-items: center;
-      justify-content: center;
-    }
+    .__scrollbar();
   }
 }

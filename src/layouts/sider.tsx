@@ -1,10 +1,8 @@
 import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { Layout, Menu } from "antd";
-import { LOGO_PNG } from "@/assets";
 import styles from "./index.module.less";
 import { RoutesProps } from "@/router/interface";
-import { HEADER_LOGO_TEXT } from "@/constant";
 import { TransfromRoutesToMenusItems } from "@/utils/tools";
 
 const { Sider } = Layout;
@@ -45,11 +43,11 @@ const Fragment: FC<{
   // 递归 routes
   const menuList = TransfromRoutesToMenusItems(routes);
   return (
-    <Sider theme="light" className={styles.sider} collapsed={false}>
-      <div className={styles.logo}>
-        <img src={LOGO_PNG} alt="" />
-        <span>{HEADER_LOGO_TEXT}</span>
-      </div>
+    <Sider
+      theme="light"
+      className={`${styles.sider} overflow-y-auto`}
+      collapsed={false}
+    >
       <Menu
         mode="inline"
         defaultOpenKeys={handleOpenKeys(routes)}

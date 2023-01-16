@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import { LOGO_PNG } from "@/assets";
+import { HEADER_LOGO_TEXT } from "@/constant";
 import {
   Layout,
   Typography,
@@ -30,29 +32,19 @@ const Fragment: FC<HeaderProps> = ({ accountInfo, configuration }) => {
 
   return (
     <Header className={styles.header}>
-      <Row style={{ height: 50 }} justify="space-between" align="middle">
-        <Col>
+      <div className={styles.logo}>
+        <img src={LOGO_PNG} alt="" />
+        <span>{HEADER_LOGO_TEXT}</span>
+      </div>
+      <div className="flex-1 flex">
+        <div className="flex">
           <Space>
-            {(() => {
-              if (Array.isArray(breadcrumb)) {
-                const item = JSON.parse(JSON.stringify(breadcrumb)).pop();
-                if (item?.path) {
-                  return (
-                    <Button
-                      type="text"
-                      icon={<LeftOutlined />}
-                      onClick={() => navigate(item.path)}
-                    />
-                  );
-                }
-              }
-            })()}
             <Title level={5} className={styles.title}>
               {name}
             </Title>
           </Space>
-        </Col>
-        <Col>
+        </div>
+        <div className="flex ml-auto">
           {accountInfo?.token ? (
             <Dropdown
               menu={{
@@ -73,8 +65,8 @@ const Fragment: FC<HeaderProps> = ({ accountInfo, configuration }) => {
               }}
             >
               <span>
-                <Avatar>{accountInfo?.name}</Avatar>
-                <Text className="ml-1">{accountInfo?.name}</Text>
+                <Avatar>{accountInfo?.userName}</Avatar>
+                <Text className="ml-1">{accountInfo?.userName}</Text>
               </span>
             </Dropdown>
           ) : (
@@ -87,8 +79,8 @@ const Fragment: FC<HeaderProps> = ({ accountInfo, configuration }) => {
               登录
             </Button>
           )}
-        </Col>
-      </Row>
+        </div>
+      </div>
     </Header>
   );
 };

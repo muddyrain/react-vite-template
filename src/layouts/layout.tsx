@@ -42,35 +42,39 @@ const Fragment: FC<LayoutProps> = ({ routes, configuration, children }) => {
     );
   } else {
     return (
-      <Layout className={styles.layout}>
-        <Sider
-          routes={routes}
-          configuration={configuration}
-          accountInfo={accountInfo}
-        />
-        <Layout className={styles.body}>
+      <Layout className={`${styles.layout} flex-col`}>
+        <div className="flex flex-col w-full">
           <Header
             routes={routes}
             configuration={configuration}
             accountInfo={accountInfo}
           />
-          <Breadcrumb
-            routes={routes}
-            configuration={configuration}
-            accountInfo={accountInfo}
-          />
-          <Content className={styles.content}>
-            <section>
-              {React.Children.map(children, (child) =>
-                React.cloneElement(child as any, {
-                  authority: configuration?.auths || [],
-                })
-              )}
-            </section>
-          </Content>
-          <Footer />
-        </Layout>
-      </Layout>
+
+          <div className={`w-full flex-1 flex overflow-hidden`}>
+            <Sider
+              routes={routes}
+              configuration={configuration}
+              accountInfo={accountInfo}
+            />
+            <div className="flex flex-col flex-1  overflow-hidden">
+              <Breadcrumb
+                routes={routes}
+                configuration={configuration}
+                accountInfo={accountInfo}
+              />
+              <Content className={`${styles.content} `}>
+                <section>
+                  {React.Children.map(children, (child) =>
+                    React.cloneElement(child as any, {
+                      authority: configuration?.auths || [],
+                    })
+                  )}
+                </section>
+              </Content>
+            </div>
+          </div>
+        </div>
+      </Layout >
     );
   }
 };
