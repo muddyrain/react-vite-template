@@ -5,6 +5,9 @@ module.exports = {
     es2021: true,
     node: true,
   },
+  globals: {
+    AMapUI: true,
+  },
   extends: [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -39,9 +42,9 @@ module.exports = {
     quotes: 0, // 要求使用双引号
     "no-console": 1,
     "space-before-function-paren": 0,
-    semi: 2,
+    semi: 0,
     // 结尾分号校验
-    "no-trailing-spaces": 2,
+    "no-trailing-spaces": 0,
     // 禁止行尾空格
     "react/prop-types": 0,
     // 防止在react组件定义中缺少props验证
