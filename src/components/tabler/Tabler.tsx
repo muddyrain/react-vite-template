@@ -10,7 +10,7 @@ import {
 } from "antd";
 import styles from "./index.module.less";
 import handles from "./handles";
-export type RecordType = object;
+export type RecordType = any;
 export interface TablerActionsProps {
   key?: string;
   confirm?: string | ((record: RecordType, index: number) => string);

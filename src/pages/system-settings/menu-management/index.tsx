@@ -1,23 +1,23 @@
-import { FC, useEffect } from "react";
-import { Block, Tabler } from "@/components";
-import Operation from "./operation";
-import columns from "./columns";
-import { useModels } from "./models";
-import { useNavigate } from "react-router-dom";
+import { FC, useEffect } from 'react'
+import { Block, Tabler } from '@/components'
+import Operation from './operation'
+import columns from './columns'
+import { useModels } from './models'
+import { useNavigate } from 'react-router-dom'
 
 const Fragment: FC = () => {
-  const { del, update, add, state, getList, dispatch } = useModels({});
-  const { loading, datalist, updater } = state;
+  const { del, update, add, state, getList, dispatch } = useModels({})
+  const { loading, datalist, updater } = state
   useEffect(() => {
-    getList();
-  }, [updater]);
+    getList()
+  }, [updater])
   return (
-    <Block>
-      <Operation
-        record={{ parentId: 0 }}
-        onSubmit={(values, hide) => add(values, hide)}
-      />
+    <Block className='flex flex-col'>
+      <div>
+        <Operation record={{ parentId: 0 }} onSubmit={(values, hide) => add(values, hide)} />
+      </div>
       <Tabler
+        className='flex-1'
         loading={loading}
         columns={columns}
         dataSource={datalist}
@@ -25,61 +25,59 @@ const Fragment: FC = () => {
         ordered={false}
         defaultExpandAllRows={true}
         expandable={{
-          childrenColumnName: "childrenList",
-          indentSize: 80,
+          childrenColumnName: 'childrenList',
+          indentSize: 80
         }}
         actionsWidth={120}
-        rowKey="id"
+        rowKey='id'
         actions={[
           {
-            key: "add",
+            key: 'add',
             content: (record) => (
               <Operation
                 record={{ parentId: record.id }}
                 parentOptions={[
                   {
                     value: record.id,
-                    label: record.menuName,
-                  },
+                    label: record.menuName
+                  }
                 ]}
-                openButtonProps={{ type: "link" }}
+                openButtonProps={{ type: 'link' }}
                 onSubmit={(values, hide) => add(values, hide)}
               />
-            ),
+            )
           },
 
           {
-            key: "edit",
+            key: 'edit',
             content: (record) => (
               <Operation
                 record={record}
-                title="编辑组织"
-                openText="编辑"
-                openButtonProps={{ type: "link" }}
+                title='编辑组织'
+                openText='编辑'
+                openButtonProps={{ type: 'link' }}
                 parentOptions={[
                   {
                     value: record.parentId || 0,
-                    label: record.parentName || "顶级",
-                  },
+                    label: record.parentName || '顶级'
+                  }
                 ]}
-                onSubmit={(values, hide) =>
-                  update({ id: record.id, ...values }, hide)
-                }
+                onSubmit={(values, hide) => update({ id: record.id, ...values }, hide)}
               />
-            ),
+            )
           },
           {
-            key: "delete",
-            content: "删除",
-            confirm: "确认删除？",
+            key: 'delete',
+            content: '删除',
+            confirm: '确认删除？',
             props: { danger: true },
             onClick: ({ id }, index) => {
-              del({ id });
-            },
-          },
+              del({ id })
+            }
+          }
         ]}
       />
     </Block>
-  );
-};
-export default Fragment;
+  )
+}
+export default Fragment
