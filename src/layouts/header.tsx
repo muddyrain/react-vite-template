@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { LOGO_PNG } from '@/assets'
-import { HEADER_LOGO_TEXT } from '@/constant'
+import { PROJECT_TITLE_TEXT } from '@/constant'
 import { Layout, Typography, Row, Col, Button, Space, Avatar, Dropdown, Menu } from 'antd'
 import { LeftOutlined, ExportOutlined } from '@ant-design/icons'
 import baseApi from '@/api/baseApi'
@@ -24,7 +24,7 @@ const Fragment: FC<HeaderProps> = ({ accountInfo, configuration }) => {
     <Header className={styles.header}>
       <div className={styles.logo}>
         <img src={LOGO_PNG} alt='' />
-        <span>{HEADER_LOGO_TEXT}</span>
+        <span>{PROJECT_TITLE_TEXT}</span>
       </div>
       <div className='flex-1 flex'>
         <div className='flex'>
