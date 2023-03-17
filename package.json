@@ -7,8 +7,6 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "sb": "start-storybook -p 6006",
-    "build-sb": "build-storybook",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -30,13 +28,6 @@
     "@bees/ui": "git+https://gitee.com/public-cli/bees-ui.git",
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
-    "@storybook/addon-actions": "^6.5.12",
-    "@storybook/addon-essentials": "^6.5.12",
-    "@storybook/addon-interactions": "^6.5.12",
-    "@storybook/addon-links": "^6.5.12",
-    "@storybook/builder-vite": "^0.2.4",
-    "@storybook/react": "^6.5.12",
-    "@storybook/testing-library": "^0.0.13",
     "@types/axios": "^0.14.0",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
