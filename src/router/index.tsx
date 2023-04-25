@@ -1,5 +1,6 @@
 import { Icon } from '@bees/ui'
 import Home from '@/pages/home'
+import Dashboard from '@/pages/dashboard'
 import Login from '@/pages/login'
 import Overview from '@/pages/overview'
 import SystemSettings from '@/pages/system-settings'
@@ -30,6 +31,13 @@ const routes: RoutesProps[] = [
     name: '首页',
     path: '/home',
     element: <Home />
+  },
+  {
+    name: '仪表盘',
+    path: '/dashboard',
+    element: <Dashboard />,
+    pure: true,
+    hideMenu: true
   },
   {
     icon: <Icon type='dashboard-2' />,

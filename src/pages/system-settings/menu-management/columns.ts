@@ -1,25 +1,25 @@
-import { TableColumnType } from "antd";
+import { TableColumnType } from 'antd'
 
 export default [
   {
-    title: "菜单名称",
-    dataIndex: "menuName",
-    width: "300px",
+    title: '菜单名称',
+    dataIndex: 'menuName',
+    width: '300px',
     ellipsis: true,
-    align: "left",
+    align: 'left'
   },
   {
-    title: "url路径",
-    dataIndex: "url",
-    width: "200px",
+    title: 'url路径',
+    dataIndex: 'url',
+    width: '200px',
     ellipsis: true,
-    align: "left",
+    align: 'left'
   },
   {
-    title: "排序",
-    dataIndex: "sort",
-    width: "200px",
+    title: '排序',
+    dataIndex: 'sort',
+    width: '200px',
     ellipsis: true,
-    align: "left",
-  },
-] as TableColumnType<any>[];
+    align: 'left'
+  }
+] as TableColumnType<any>[]

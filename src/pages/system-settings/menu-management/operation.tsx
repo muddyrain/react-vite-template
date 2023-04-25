@@ -1,35 +1,26 @@
-import { useState } from "react";
-import { Spin } from "antd";
-import Dialog from "@/components/dialog";
-import Former from "@/components/former";
+import { useState } from 'react'
+import { Spin } from 'antd'
+import Dialog from '@/components/dialog'
+import Former from '@/components/former'
 
-const Fragment = ({
-  record,
-  title,
-  openText,
-  openButtonProps,
-  onSubmit,
-  parentOptions,
-}) => {
-  const [$form] = Former.useForm();
-  const [loading, setLoading] = useState(false);
+const Fragment = ({ record, title, openText, openButtonProps, onSubmit, parentOptions }) => {
+  const [$form] = Former.useForm()
+  const [loading, setLoading] = useState(false)
   return (
     <Dialog
       title={title}
-      width="small"
+      width='small'
       openText={openText}
       openButtonProps={openButtonProps}
       onOpen={() => {
         if (record) {
           // 详情
-          $form.setFieldsValue(record);
+          $form.setFieldsValue(record)
         }
       }}
       onOk={(hide) => {
-        $form
-          .validateFields()
-          .then((values) => onSubmit({ ...record, ...values }, hide));
-        return true;
+        $form.validateFields().then((values) => onSubmit({ ...record, ...values }, hide))
+        return true
       }}
       afterClose={() => $form.resetFields()}
     >
@@ -43,65 +34,65 @@ const Fragment = ({
           submitText={null}
           datasource={[
             {
-              label: "父节点",
-              key: "parentId",
+              label: '父节点',
+              key: 'parentId',
               required: true,
-              view: "Select",
+              view: 'Select',
               viewProps: {
                 disabled: true,
-                options: parentOptions,
-              },
+                options: parentOptions
+              }
             },
             {
-              label: "菜单名称",
-              key: "menuName",
+              label: '菜单名称',
+              key: 'menuName',
               required: true,
-              view: "Input",
+              view: 'Input'
             },
             {
-              label: "菜单类型",
-              key: "menuType",
+              label: '菜单类型',
+              key: 'menuType',
               required: true,
-              view: "Select",
+              view: 'Select',
               viewProps: {
-                options: [],
-              },
+                options: []
+              }
             },
             {
-              label: "路径",
-              key: "url",
+              label: '路径',
+              key: 'url',
               required: true,
-              view: "Input",
+              view: 'Input'
             },
             {
-              label: "排序",
-              key: "sort",
+              label: '排序',
+              key: 'sort',
               required: true,
-              view: "Input",
-              rules: [{ type: "integer" }],
+              view: 'Input',
+              rules: [{ type: 'integer' }],
               viewProps: {
-                type: "number",
-              },
-            },
+                type: 'number'
+              }
+            }
           ]}
         />
       </Spin>
     </Dialog>
-  );
-};
+  )
+}
 
 Fragment.defaultProps = {
   record: {},
-  title: "添加组织",
-  openText: "添加",
+  title: '添加组织',
+  openText: '添加',
   parentOptions: [
     {
-      label: "顶级",
-      value: 0,
-    },
+      label: '顶级',
+      value: 0
+    }
   ],
-  openButtonProps: { type: "primary", style: { marginBottom: 16 } },
-  onSubmit: (values = {}, hide) => {},
-};
+  openButtonProps: { type: 'primary', style: { marginBottom: 16 } },
+  onSubmit: (values = {}, hide) => {}
+}
 
-export default Fragment;
+export default Fragment

@@ -1,8 +1,8 @@
-import React from 'react';
-import Block from '@/components/block';
+import React from 'react'
+import Block from '@/components/block'
 
-const Fragment = () => <Block>进行中</Block>;
+const Fragment = () => <Block>进行中</Block>
 
-Fragment.defaultProps = {};
+Fragment.defaultProps = {}
 
-export default Fragment;
+export default Fragment

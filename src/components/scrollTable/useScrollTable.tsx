@@ -13,8 +13,9 @@ export const useScrollTable = ({ element, headHeight = 45, rowNum = 5, transitio
     if (!element) return
     const rowHeight = element.clientHeight / rowNum
     for (const [index, item] of [...element.children].entries()) {
-      ;(item as HTMLDivElement).style.height = rowHeight + 'px'
-      ;(item as HTMLDivElement).style.lineHeight = rowHeight + 'px'
+      const nItme = item as HTMLDivElement
+      nItme.style.height = rowHeight + 'px'
+      nItme.style.lineHeight = rowHeight + 'px'
     }
     transtionTimer = setTimeout(() => {
       if (!element) return

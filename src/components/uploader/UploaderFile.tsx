@@ -1,22 +1,18 @@
-import { REQUEST_URL } from "../../constant";
-import { Button, ButtonProps, Upload } from "antd";
-import React, { FC, useState } from "react";
-import {
-  HttpRequestHeader,
-  UploadChangeParam,
-  UploadFile,
-} from "antd/lib/upload/interface";
-type FileListType = UploadFile<any>[];
+import { REQUEST_URL } from '../../constant'
+import { Button, ButtonProps, Upload } from 'antd'
+import React, { FC, useState } from 'react'
+import { HttpRequestHeader, UploadChangeParam, UploadFile } from 'antd/lib/upload/interface'
+type FileListType = UploadFile<any>[]
 export interface UploaderFileProps {
-  openText?: React.ReactNode;
-  openButtonProps?: ButtonProps;
-  actionUrl?: string;
-  list?: FileListType;
-  defaultFileList?: FileListType;
-  onSuccess?: (fileList: FileListType) => void;
-  onRemove?: (file: UploadFile<any>, fileList: FileListType) => void;
-  onChange?: (e: any) => void;
-  returnFormatter?: (response: any, file: UploadFile<any>) => any;
+  openText?: React.ReactNode
+  openButtonProps?: ButtonProps
+  actionUrl?: string
+  list?: FileListType
+  defaultFileList?: FileListType
+  onSuccess?: (fileList: FileListType) => void
+  onRemove?: (file: UploadFile<any>, fileList: FileListType) => void
+  onChange?: (e: any) => void
+  returnFormatter?: (response: any, file: UploadFile<any>) => any
 }
 const UploaderFile: FC<UploaderFileProps> = ({
   openText,
@@ -27,56 +23,55 @@ const UploaderFile: FC<UploaderFileProps> = ({
   onChange,
   onRemove,
   returnFormatter,
-  defaultFileList = [],
+  defaultFileList = []
 }) => {
-  const [loading, setLoading] = useState(false);
-  const [fileList, setFileList] = useState<FileListType>(list || []);
+  const [loading, setLoading] = useState(false)
+  const [fileList, setFileList] = useState<FileListType>(list || [])
   const handleChange = (info: UploadChangeParam<UploadFile<any>>) => {
-    const { status, response, name } = info.file;
-    let newFileList = [...info.fileList];
+    const { status, response, name } = info.file
+    const newFileList = [...info.fileList]
     switch (status) {
-      case "uploading":
-        setLoading(true);
-        break;
-      case "done":
+      case 'uploading':
+        setLoading(true)
+        break
+      case 'done': {
         const formatterList = newFileList.map((file) => {
           if (file.response && returnFormatter) {
-            return returnFormatter(file.response, file);
+            return returnFormatter(file.response, file)
           }
-          return file;
-        });
-        onChange?.(formatterList);
-        setFileList(newFileList);
-        onSuccess?.(formatterList);
-        setLoading(false);
-        break;
-      case "error":
-        setLoading(false);
-        break;
+          return file
+        })
+        onChange?.(formatterList)
+        setFileList(newFileList)
+        onSuccess?.(formatterList)
+        setLoading(false)
+        break
+      }
+      case 'error':
+        setLoading(false)
+        break
     }
-  };
+  }
   return (
-    <div style={{ width: "100%" }}>
+    <div style={{ width: '100%' }}>
       <Upload
         action={REQUEST_URL + actionUrl}
         onChange={handleChange}
         onRemove={(e) => {
-          const newFileList = fileList.filter((item) => item.uid !== e.uid);
-          setFileList(newFileList);
-          onChange?.(newFileList);
-          onRemove?.(e, newFileList);
+          const newFileList = fileList.filter((item) => item.uid !== e.uid)
+          setFileList(newFileList)
+          onChange?.(newFileList)
+          onRemove?.(e, newFileList)
         }}
         multiple
         showUploadList
         defaultFileList={defaultFileList}
-        className="upload-list-inline"
+        className='upload-list-inline'
         headers={
           (() => {
-            const accountJSON = window.sessionStorage.getItem("accountInfo");
-            const accountInfo = JSON.parse(accountJSON || "{}");
-            return accountInfo?.token
-              ? { Authorization: accountInfo.token }
-              : {};
+            const accountJSON = window.sessionStorage.getItem('accountInfo')
+            const accountInfo = JSON.parse(accountJSON || '{}')
+            return accountInfo?.token ? { Authorization: accountInfo.token } : {}
           })() as HttpRequestHeader
         }
       >
@@ -85,11 +80,11 @@ const UploaderFile: FC<UploaderFileProps> = ({
         </Button>
       </Upload>
     </div>
-  );
-};
+  )
+}
 UploaderFile.defaultProps = {
-  openText: "上传",
+  openText: '上传',
   openButtonProps: {},
-  actionUrl: "/file/uploadFile",
-};
-export default UploaderFile;
+  actionUrl: '/file/uploadFile'
+}
+export default UploaderFile

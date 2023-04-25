@@ -1,29 +1,29 @@
-import { FC, useState } from "react";
-import { Button } from "antd";
-import { LOGO_DARK_PNG } from "@/assets";
-import baseApi from "@/api/baseApi";
-import styles from "./index.module.less";
-import { Former } from "@/components";
+import { FC, useState } from 'react'
+import { Button } from 'antd'
+import { LOGO_DARK_PNG } from '@/assets'
+import baseApi from '@/api/baseApi'
+import styles from './index.module.less'
+import { Former } from '@/components'
 
 const Fragment: FC = () => {
-  const [$form] = Former.useForm();
-  const [processing, setProcessing] = useState(false);
+  const [$form] = Former.useForm()
+  const [processing, setProcessing] = useState(false)
   const handleSubmit = () => {
     $form.validateFields().then((values) => {
-      setProcessing(true);
+      setProcessing(true)
       baseApi
         .Login(values)
         .then((DATA) => {
           if (DATA?.token) {
-            window.sessionStorage.setItem("accountInfo", JSON.stringify(DATA));
-            window.location.href = "/";
+            window.sessionStorage.setItem('accountInfo', JSON.stringify(DATA))
+            window.location.href = '/'
           }
         })
         .finally(() => {
-          setProcessing(false);
-        });
-    });
-  };
+          setProcessing(false)
+        })
+    })
+  }
   return (
     <section className={styles.container}>
       <div className={styles.former}>
@@ -36,50 +36,50 @@ const Fragment: FC = () => {
           wrapperCol={20}
           column={1}
           gutter={16}
-          formProps={{ size: "large" }}
+          formProps={{ size: 'large' }}
           datasource={[
             {
-              label: "账号",
-              key: "username",
-              initialValue: "admin",
+              label: '账号',
+              key: 'username',
+              initialValue: 'admin',
               required: true,
-              view: "Input",
+              view: 'Input',
               viewProps: {
                 onKeyDown: ({ keyCode }) => {
-                  if (keyCode === 13) handleSubmit();
-                },
-              },
+                  if (keyCode === 13) handleSubmit()
+                }
+              }
             },
             {
-              label: "密码",
-              key: "password",
-              initialValue: "admin",
+              label: '密码',
+              key: 'password',
+              initialValue: 'admin',
               required: true,
-              view: "Password",
+              view: 'Password',
               viewProps: {
                 onKeyDown: ({ keyCode }) => {
-                  if (keyCode === 13) handleSubmit();
-                },
-              },
-            },
+                  if (keyCode === 13) handleSubmit()
+                }
+              }
+            }
           ]}
         />
         <Button
-          type="primary"
-          size="large"
+          type='primary'
+          size='large'
           block
           loading={processing}
           onClick={() => {
-            handleSubmit();
+            handleSubmit()
           }}
         >
           登录
         </Button>
       </div>
     </section>
-  );
-};
+  )
+}
 
-Fragment.defaultProps = {};
+Fragment.defaultProps = {}
 
-export default Fragment;
+export default Fragment

@@ -1,53 +1,45 @@
 /* eslint-disable no-empty-function */
 /* eslint-disable no-unused-vars */
-import React, { FC } from "react";
-import {
-  ButtonProps,
-  PaginationProps,
-  Table,
-  TableColumnType,
-  TableProps,
-} from "antd";
-import styles from "./index.module.less";
-import handles from "./handles";
-export type RecordType = any;
+import React, { FC } from 'react'
+import { ButtonProps, PaginationProps, Table, TableColumnType, TableProps } from 'antd'
+import styles from './index.module.less'
+import handles from './handles'
+export type RecordType = any
 export interface TablerActionsProps {
-  key?: string;
-  confirm?: string | ((record: RecordType, index: number) => string);
-  visible?: boolean | ((record: RecordType, index: number) => boolean);
-  loading?: boolean | ((record: RecordType, index: number) => boolean);
-  disabled?: boolean | ((record: RecordType, index: number) => boolean);
-  props?: ButtonProps;
-  content:
-    | React.ReactNode
-    | ((record: RecordType, index: number) => React.ReactNode);
-  onClick?: (record: RecordType, index: number) => void;
+  key?: string
+  confirm?: string | ((record: RecordType, index: number) => string)
+  visible?: boolean | ((record: RecordType, index: number) => boolean)
+  loading?: boolean | ((record: RecordType, index: number) => boolean)
+  disabled?: boolean | ((record: RecordType, index: number) => boolean)
+  props?: ButtonProps
+  content: React.ReactNode | ((record: RecordType, index: number) => React.ReactNode)
+  onClick?: (record: RecordType, index: number) => void
 }
 export interface TablerProps extends TableProps<any> {
   /** 样式名 */
-  className?: string;
+  className?: string
   /** 表格行 key 的取值 */
-  rowKey?: string;
+  rowKey?: string
   /** 表格列的配置描述 */
-  columns?: TableColumnType<RecordType>[];
+  columns?: TableColumnType<RecordType>[]
   /** 数据源 */
-  dataSource?: RecordType[];
+  dataSource?: RecordType[]
   /** 表格加载中 */
-  loading?: boolean;
+  loading?: boolean
   /** 是否标记滚动 */
-  fixed?: boolean;
+  fixed?: boolean
   /** 是否标记序号 */
-  ordered?: boolean;
+  ordered?: boolean
   /** 操作栏的宽度 */
-  actionsWidth?: number | string | undefined;
+  actionsWidth?: number | string | undefined
   /** 操作栏数据 */
-  actions?: TablerActionsProps[];
+  actions?: TablerActionsProps[]
   /** 分页 */
-  pagination?: PaginationProps;
+  pagination?: PaginationProps
   /** 监听分页变化 */
-  onPageChange?: (obj: { page: number; size: number }) => void;
+  onPageChange?: (obj: { page: number; size: number }) => void
   /** 操作栏配置项 */
-  actionsProps?: TableColumnType<RecordType>;
+  actionsProps?: TableColumnType<RecordType>
 }
 
 const Tabler: FC<TablerProps> = ({
@@ -75,23 +67,23 @@ const Tabler: FC<TablerProps> = ({
           fixed,
           actionsWidth,
           actions,
-          actionsProps,
-        }),
+          actionsProps
+        })
       ]}
       pagination={{
-        size: "default",
+        size: 'default',
         showTotal: (value) => `共 ${value} 条`,
         ...pagination,
         onChange: (page, size) => {
-          onPageChange!({ page, size });
-        },
+          onPageChange!({ page, size })
+        }
       }}
     />
-  );
-};
+  )
+}
 
 Tabler.defaultProps = {
-  className: "",
+  className: '',
   /**
    * @param {columns} Array<Object>
    * [{
@@ -102,7 +94,7 @@ Tabler.defaultProps = {
    * }, ...]
    */
   columns: [],
-  rowKey: "id",
+  rowKey: 'id',
   dataSource: [],
   fixed: false, // 是否标记滚动
   ordered: true, // 是否标记序号
@@ -121,7 +113,7 @@ Tabler.defaultProps = {
   actions: [],
   actionsProps: {}, // 操作列补充
   pagination: {},
-  onPageChange: ({ page = 1, size = 10 }) => null,
-};
+  onPageChange: ({ page = 1, size = 10 }) => null
+}
 
-export default Tabler;
+export default Tabler

@@ -1,42 +1,30 @@
-import { useEffect, useState } from "react";
-import { Spin } from "antd";
-import Dialog from "@/components/dialog";
-import Former from "@/components/former";
-const Fragment = ({
-  record,
-  title,
-  openText,
-  openButtonProps,
-  onSubmit,
-  organizationList,
-  roleList: defaultRoleList,
-  getRoleList,
-  roleLoading,
-}) => {
-  const [$form] = Former.useForm();
-  const [loading, setLoading] = useState(false);
-  const [roleList, setRoleList] = useState([]);
+import { useEffect, useState } from 'react'
+import { Spin } from 'antd'
+import Dialog from '@/components/dialog'
+import Former from '@/components/former'
+const Fragment = ({ record, title, openText, openButtonProps, onSubmit, organizationList, roleList: defaultRoleList, getRoleList, roleLoading }) => {
+  const [$form] = Former.useForm()
+  const [loading, setLoading] = useState(false)
+  const [roleList, setRoleList] = useState([])
   useEffect(() => {
-    setRoleList(defaultRoleList);
-  }, [defaultRoleList]);
+    setRoleList(defaultRoleList)
+  }, [defaultRoleList])
   return (
     <Dialog
       title={title}
-      width="small"
+      width='small'
       openText={openText}
       openButtonProps={openButtonProps}
       onOpen={() => {
         if (record?.id) {
           // 详情
-          $form.setFieldsValue(record);
+          $form.setFieldsValue(record)
         }
       }}
       onOk={(hide) => {
-        const { roleName, organizationName, ...afterRecord } = record;
-        $form
-          .validateFields()
-          .then((values) => onSubmit({ ...afterRecord, ...values }, hide));
-        return true;
+        const { roleName, organizationName, ...afterRecord } = record
+        $form.validateFields().then((values) => onSubmit({ ...afterRecord, ...values }, hide))
+        return true
       }}
       afterClose={() => $form.resetFields()}
     >
@@ -50,77 +38,77 @@ const Fragment = ({
           submitText={null}
           datasource={[
             {
-              label: "用户名称",
-              key: "userName",
+              label: '用户名称',
+              key: 'userName',
               required: true,
-              view: "Input",
+              view: 'Input'
             },
             {
-              label: "用户账号",
-              key: "account",
+              label: '用户账号',
+              key: 'account',
               required: true,
-              view: "Input",
+              view: 'Input'
             },
             {
-              label: "密码",
-              key: "passWord",
+              label: '密码',
+              key: 'passWord',
               visible: !record.id,
               required: true,
-              view: "Password",
-              rules: [{ type: "password" }],
+              view: 'Password',
+              rules: [{ type: 'password' }]
             },
             {
-              label: "用户角色",
-              key: "roleId",
+              label: '用户角色',
+              key: 'roleId',
               required: true,
-              view: "SelectSearch",
+              view: 'SelectSearch',
               viewProps: {
-                getData: ()=>{},
-                searchKey: "roleName",
+                getData: () => {},
+                searchKey: 'roleName',
                 fieldNames: {
-                  label: "roleName",
-                  value: "id",
-                },
-              },
+                  label: 'roleName',
+                  value: 'id'
+                }
+              }
             },
             {
-              label: "用户组织",
-              key: "organizationId",
+              label: '用户组织',
+              key: 'organizationId',
               required: true,
-              view: "TreeSelect",
+              view: 'TreeSelect',
               viewProps: {
                 treeData: organizationList,
                 fieldNames: {
-                  label: "organizationName",
-                  children: "childrenList",
-                  value: "id",
-                },
-              },
+                  label: 'organizationName',
+                  children: 'childrenList',
+                  value: 'id'
+                }
+              }
             },
             {
-              label: "手机号",
-              key: "phone",
+              label: '手机号',
+              key: 'phone',
               required: true,
-              view: "Input",
-              rules: [{ type: "mobile" }],
-            },
+              view: 'Input',
+              rules: [{ type: 'mobile' }]
+            }
           ]}
         />
       </Spin>
     </Dialog>
-  );
-};
+  )
+}
 
 Fragment.defaultProps = {
   record: {},
-  title: "添加用户",
-  openText: "添加",
-  openButtonProps: { type: "primary", style: { marginBottom: 16 } },
+  title: '添加用户',
+  openText: '添加',
+  openButtonProps: { type: 'primary', style: { marginBottom: 16 } },
   onSubmit: (values = {}, hide) => {},
   getRoleList: () => {},
   organizationList: [],
   roleList: [],
-  roleLoading: false,
-};
+  roleLoading: false
+}
 
-export default Fragment;
+export default Fragment

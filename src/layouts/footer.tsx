@@ -1,13 +1,11 @@
-import { Layout } from "antd";
-import styles from "./index.module.less";
-import { FOOTER_CONTENT_TEXT } from "@/constant";
+import { Layout } from 'antd'
+import styles from './index.module.less'
+import { FOOTER_CONTENT_TEXT } from '@/constant'
 
-const { Footer } = Layout;
+const { Footer } = Layout
 
-const Fragment = () => (
-  <Footer className={styles.footer}>{FOOTER_CONTENT_TEXT}</Footer>
-);
+const Fragment = () => <Footer className={styles.footer}>{FOOTER_CONTENT_TEXT}</Footer>
 
-Fragment.defaultProps = {};
+Fragment.defaultProps = {}
 
-export default Fragment;
+export default Fragment

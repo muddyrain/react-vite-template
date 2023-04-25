@@ -1,24 +1,24 @@
-import { Modal } from "antd";
-import styles from "./index.module.less";
+import { Modal } from 'antd'
+import styles from './index.module.less'
 
-const { confirm } = Modal;
-const widths = { small: 480, medium: 680, large: 880 }; // 预设弹窗宽度
+const { confirm } = Modal
+const widths = { small: 480, medium: 680, large: 880 } // 预设弹窗宽度
 
 const Fragment = ({
-  className = "",
+  className = '',
   style = {},
   bodyStyle = {},
   icon = null,
-  title = "弹窗标题",
-  width = "medium", // 标准弹窗宽度 => small:480 | 【默认】medium:680 | large:880 | integer
-  okText = "确定", // 确定按钮文案 => 值为 false 时，不显示
+  title = '弹窗标题',
+  width = 'medium', // 标准弹窗宽度 => small:480 | 【默认】medium:680 | large:880 | integer
+  okText = '确定', // 确定按钮文案 => 值为 false 时，不显示
   okButtonProps = {},
   onOk = (hide = () => {}) => {}, // 用 return 拦截 visible
-  cancelText = "取消", // 取消按钮文案 => 值为 false 时，不显示
+  cancelText = '取消', // 取消按钮文案 => 值为 false 时，不显示
   cancelButtonProps = {},
   onCancel = () => {}, // 用 return 拦截 visible
   afterClose = () => {}, // 弹窗完全关闭后的回调
-  content = "弹窗内容",
+  content = '弹窗内容'
 } = {}) => {
   const modal = confirm({
     closable: true,
@@ -35,18 +35,18 @@ const Fragment = ({
     cancelText,
     cancelButtonProps,
     onOk: (): Promise<any> | undefined => {
-      const result = onOk(modal.destroy) as any;
+      const result = onOk(modal.destroy) as any
       if (result) {
-        return new Promise((resolve, reject) => reject());
+        return new Promise((resolve, reject) => reject())
       }
     },
     onCancel() {
-      onCancel();
+      onCancel()
     },
     afterClose: () => {
-      afterClose();
-    },
-  });
-};
+      afterClose()
+    }
+  })
+}
 
-export default Fragment;
+export default Fragment

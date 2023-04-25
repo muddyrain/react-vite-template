@@ -12,11 +12,11 @@ const Fragment: FC = () => {
   >([])
   const [data, setData] = useState<any[]>([])
   useEffect(() => {
-    let labels = Array.from({ length: 4 }).map((item) => ({
+    const labels = Array.from({ length: 4 }).map((item) => ({
       label: '名称',
       key: 'name'
     }))
-    let data = Array.from({ length: 20 }).map((item) => ({
+    const data = Array.from({ length: 20 }).map((item) => ({
       name: mockjs.Random.cname(),
       render(item) {
         return <Button type='primary'>{item.name}</Button>

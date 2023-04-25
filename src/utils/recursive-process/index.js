@@ -7,25 +7,25 @@
  * @param {String} children 子集
  */
 const GecursiveProcess = (datasource = [], maps = {}) => {
-  const type = Object.prototype.toString.call(maps);
+  const type = Object.prototype.toString.call(maps)
 
   if (type === '[object Function]') {
     return datasource.map((item) => {
-      const { values, key } = maps(item);
+      const { values, key } = maps(item)
       if (Array.isArray(item[key])) {
         return {
           ...values,
-          children: GecursiveProcess(item[key], maps),
-        };
+          children: GecursiveProcess(item[key], maps)
+        }
       } else {
-        return { ...values };
+        return { ...values }
       }
-    });
+    })
   } else {
-    let { label, value, children } = maps;
-    label = label || 'label';
-    value = value || 'value';
-    children = children || 'children';
+    let { label, value, children } = maps
+    label = label || 'label'
+    value = value || 'value'
+    children = children || 'children'
 
     return datasource.map((item) => {
       if (Array.isArray(item[children])) {
@@ -33,17 +33,17 @@ const GecursiveProcess = (datasource = [], maps = {}) => {
           ...item,
           label: item[label],
           value: item[value],
-          children: GecursiveProcess(item[children], maps),
-        };
+          children: GecursiveProcess(item[children], maps)
+        }
       } else {
         return {
           ...item,
           label: item[label],
-          value: item[value],
-        };
+          value: item[value]
+        }
       }
-    });
+    })
   }
-};
+}
 
-export default GecursiveProcess;
+export default GecursiveProcess

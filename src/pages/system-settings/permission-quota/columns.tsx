@@ -1,11 +1,11 @@
-import { Checkbox, TableColumnType } from "antd";
+import { Checkbox, TableColumnType } from 'antd'
 
 export default [
   {
-    title: "菜单名称",
-    dataIndex: "menuName",
-    width: "200px",
+    title: '菜单名称',
+    dataIndex: 'menuName',
+    width: '200px',
     ellipsis: true,
-    align: "left",
-  },
-] as TableColumnType<any>[];
+    align: 'left'
+  }
+] as TableColumnType<any>[]

@@ -1,40 +1,34 @@
-import { FC, useEffect, useState } from "react";
-import { Select, SelectProps } from "antd";
+import { FC, useEffect, useState } from 'react'
+import { Select, SelectProps } from 'antd'
 
 export interface SelectSearchProps {
-  fieldNames?: SelectProps["fieldNames"];
-  getData: (params: any) => any;
-  onSuccess: () => any;
-  searchKey: string;
+  fieldNames?: SelectProps['fieldNames']
+  getData: (params: any) => any
+  onSuccess: () => any
+  searchKey: string
 }
-const SelectSearch: FC<SelectSearchProps> = ({
-  fieldNames,
-  getData,
-  searchKey = "name",
-  onSuccess,
-  ...afterParams
-}) => {
-  const [loading, setLoading] = useState(false);
-  const [options, setOptions] = useState([]);
+const SelectSearch: FC<SelectSearchProps> = ({ fieldNames, getData, searchKey = 'name', onSuccess, ...afterParams }) => {
+  const [loading, setLoading] = useState(false)
+  const [options, setOptions] = useState([])
   useEffect(() => {
     if (options.length) {
-      onSuccess?.();
+      onSuccess?.()
     }
-  }, [options]);
+  }, [options])
   const getList = async (params = {}) => {
-    setLoading(true);
+    setLoading(true)
     const DATA = await getData({
       pageNum: 1,
       pageSize: 10,
-      ...params,
-    });
-    setOptions(DATA?.records || []);
-    setLoading(false);
-    return DATA?.records || [];
-  };
+      ...params
+    })
+    setOptions(DATA?.records || [])
+    setLoading(false)
+    return DATA?.records || []
+  }
   useEffect(() => {
-    getList();
-  }, []);
+    getList()
+  }, [])
   const props = {
     options,
     showSearch: true,
@@ -43,12 +37,12 @@ const SelectSearch: FC<SelectSearchProps> = ({
     loading: loading,
     onSearch: (newValue: string) => {
       if (newValue) {
-        getList({ [searchKey]: newValue });
+        getList({ [searchKey]: newValue })
       } else {
-        getList({ [searchKey]: "" });
+        getList({ [searchKey]: '' })
       }
-    },
-  };
-  return <Select {...afterParams} {...props} fieldNames={fieldNames} />;
-};
-export default SelectSearch;
+    }
+  }
+  return <Select {...afterParams} {...props} fieldNames={fieldNames} />
+}
+export default SelectSearch
