@@ -3,9 +3,7 @@ import { useGLTF } from '@react-three/drei'
 import { Mesh, Object3D } from 'three'
 import * as THREE from 'three'
 import { useFrame, useLoader } from '@react-three/fiber'
-
-// 预先加载 车辆 模型
-useGLTF.preload('./ferrari.glb')
+import { GameControl } from './useControls'
 
 // 主题材质
 const bodyMaterial = new THREE.MeshPhysicalMaterial({
@@ -29,47 +27,42 @@ const glassMaterial = new THREE.MeshPhysicalMaterial({
   roughness: 0,
   transmission: 1.0
 })
-
-const Chassis: FC<{ ref: any }> = forwardRef<Mesh>((_, ref) => {
+const Chassis = forwardRef<Mesh, { loadWheels: (wheels: Mesh[]) => void }>(({ loadWheels }, ref) => {
   const gltfObj = useGLTF('./ferrari.glb')
   // 获取汽车模型对象
   const carModel = gltfObj.scene.children[0]
+  if (!carModel) return <mesh />
   // 获取汽车轮胎模型对象
   const rims = [
-    carModel.getObjectByName('rim_fl') as Mesh,
-    carModel.getObjectByName('rim_fr') as Mesh,
-    carModel.getObjectByName('rim_rl') as Mesh,
-    carModel.getObjectByName('rim_rr') as Mesh
+    carModel?.getObjectByName('rim_fl') as Mesh,
+    carModel?.getObjectByName('rim_fr') as Mesh,
+    carModel?.getObjectByName('rim_rl') as Mesh,
+    carModel?.getObjectByName('rim_rr') as Mesh
   ]
   // 遍历轮缘对象组分别设置材质
   for (const rim of rims) {
-    rim.material = detailsMaterial
+    if (rim) rim.material = detailsMaterial
   }
   // 获取汽车玻璃模型对象
-  const glass = carModel.getObjectByName('glass') as Mesh
+  const glass = carModel?.getObjectByName('glass') as Mesh
   glass.material = glassMaterial
 
   // 获取汽车主题模型对象
-  const body = carModel.getObjectByName('body') as Mesh
+  const body = carModel?.getObjectByName('body') as Mesh
   body.material = bodyMaterial
-  const wheels: Array<Mesh> = []
+  const [wheels, setWheels] = useState<Array<Mesh>>([])
+  const wheel_keys = ['wheel_fl', 'wheel_fr', 'wheel_rl', 'wheel_rr']
   // 存放 轮胎模型对象
-  wheels.push(
-    carModel.getObjectByName('wheel_fl') as Mesh,
-    carModel.getObjectByName('wheel_fr') as Mesh,
-    carModel.getObjectByName('wheel_rl') as Mesh,
-    carModel.getObjectByName('wheel_rr') as Mesh
-  )
-
+  for (const [index, key] of wheel_keys.entries()) {
+    const target = carModel?.getObjectByName(key) as Mesh
+    if (target) {
+      wheels.push(target)
+    }
+  }
+  loadWheels(wheels)
   // 添加 汽车底板阴影
   const shadow = useLoader(THREE.TextureLoader, './ferrari_ao.png')
 
-  useFrame((state) => {
-    const time = state.clock.getElapsedTime()
-    for (const wheel of wheels) {
-      wheel.rotation.x = time * Math.PI * 2
-    }
-  })
   return (
     <mesh ref={ref}>
       <group>
