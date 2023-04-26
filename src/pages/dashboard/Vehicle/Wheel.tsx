@@ -1,9 +1,10 @@
 import { useCompoundBody } from '@react-three/cannon'
-import { forwardRef, useMemo } from 'react'
-import { Group } from 'three'
+import { forwardRef, useEffect, useMemo } from 'react'
+import { Group, Mesh } from 'three'
 import { DirectionType } from './types'
 import { useGLTF } from '@react-three/drei'
 import { Vector3 } from '@react-three/fiber'
+import { detailsMaterial } from './Chassis'
 
 const Wheel = forwardRef<
   Group,
@@ -26,9 +27,14 @@ const Wheel = forwardRef<
     }),
     ref
   )
-  const isBack = useMemo(() => {
-    return ['rl', 'rr'].includes(direction)
-  }, [direction])
+  useEffect(() => {
+    gltf.scene.children.forEach((_mesh) => {
+      const mesh = _mesh as Mesh
+      if (mesh.name === 'rim_' + direction) {
+        mesh.material = detailsMaterial
+      }
+    })
+  }, [])
   return (
     <group ref={ref}>
       <mesh>
