@@ -1,101 +1,82 @@
-import { FC, useRef } from 'react'
-import Chassis from './Chassis'
 import { WheelInfoOptions, useBox, useRaycastVehicle } from '@react-three/cannon'
+import { useRef } from 'react'
 import { Group, Mesh } from 'three'
-import { useControls } from './useControls'
-import { useFrame } from '@react-three/fiber'
+import Wheel from './Wheel'
+import Chassis from './Chassis'
 
-const Vehicle = ({
-  angularVelocity,
-  back = -1.15,
-  force = 1500,
-  front = 1.3,
-  height = -0.04,
-  maxBrake = 50,
-  position,
-  radius = 0.7,
-  rotation,
-  steer = 0.5,
-  width = 1.2
-}) => {
-  const wheels = useRef<Mesh[]>([])
-
-  const controls = useControls()
-
-  const [chassisBody, chassisApi] = useBox(
-    () => ({
-      allowSleep: false,
-      angularVelocity,
-      args: [1.7, 1, 4],
-      mass: 500,
-      position,
-      rotation
-    }),
-    useRef<Mesh>(null)
-  )
-
-  const wheelInfo: WheelInfoOptions = {
-    axleLocal: [-1, 0, 0], // This is inverted for asymmetrical wheel models (left v. right sided)
-    customSlidingRotationalSpeed: -30,
-    dampingCompression: 4.4,
-    dampingRelaxation: 10,
-    directionLocal: [0, -1, 0], // set to same as Physics Gravity
-    frictionSlip: 2,
-    maxSuspensionForce: 1e4,
-    maxSuspensionTravel: 0.3,
+const Vehicle = ({ radius = 0.5, width = 3, height = 1, depth = 1.5 }) => {
+  // 设置
+  const wheels = [useRef<Group>(null), useRef<Group>(null), useRef<Group>(null), useRef<Group>(null)]
+  const [chassisBody] = useBox<Mesh>(() => ({
+    mass: 500,
+    allowSleep: false,
+    args: [width, height, depth],
+    position: [0, 4, 0],
+    angularVelocity: [0, 0.5, 0],
+    rotation: [0, -Math.PI / 2, 0]
+  }))
+  const wheelOptions: WheelInfoOptions = {
+    // 车轮半径
     radius,
+    // 设置与物体相同的转动方向
+    dampingRelaxation: 2.3,
+    // 设置与物体相同的转动方向
+    directionLocal: [0, -1, 0],
+    // 最大的悬架力
+    maxSuspensionForce: 1e4,
+    // 最大的悬架时间行程
+    maxSuspensionTravel: 0.3,
+    // 车辆的转向轴
+    axleLocal: [0, 0, 1],
+    // 设置车轮的滑动摩擦力
+    frictionSlip: 1.4,
+    // 设置悬架的休息长度
     suspensionRestLength: 0.3,
+    // 设置悬架的刚度
     suspensionStiffness: 30,
+    // 设置压缩的阻尼
+    dampingCompression: 4.4,
+    // 使用自定义滑动转速
     useCustomSlidingRotationalSpeed: true
   }
-
   const wheelInfo1: WheelInfoOptions = {
-    ...wheelInfo,
-    chassisConnectionPointLocal: [-width / 2, height, front],
+    ...wheelOptions,
+    chassisConnectionPointLocal: [-width / 2, -height / 2, -depth / 2],
     isFrontWheel: true
   }
   const wheelInfo2: WheelInfoOptions = {
-    ...wheelInfo,
-    chassisConnectionPointLocal: [width / 2, height, front],
+    ...wheelOptions,
+    chassisConnectionPointLocal: [-width / 2, -height / 2, depth / 2],
     isFrontWheel: true
   }
   const wheelInfo3: WheelInfoOptions = {
-    ...wheelInfo,
-    chassisConnectionPointLocal: [-width / 2, height, back],
+    ...wheelOptions,
+    chassisConnectionPointLocal: [width / 2, -height / 2, -depth / 2],
     isFrontWheel: false
   }
   const wheelInfo4: WheelInfoOptions = {
-    ...wheelInfo,
-    chassisConnectionPointLocal: [width / 2, height, back],
+    ...wheelOptions,
+    chassisConnectionPointLocal: [width / 2, -height / 2, depth / 2],
     isFrontWheel: false
   }
-
-  const [vehicle, vehicleApi] = useRaycastVehicle(
+  // 创建投射车辆
+  const [vehcile] = useRaycastVehicle(
     () => ({
       chassisBody,
       wheelInfos: [wheelInfo1, wheelInfo2, wheelInfo3, wheelInfo4],
-      wheels: wheels.current as any
+      wheels
     }),
     useRef<Group>(null)
   )
 
-  useFrame((state) => {
-    const time = state.clock.getElapsedTime()
-    const { backward, brake, forward, left, reset, right } = controls.current
-    // for (let e = 2; e < 4; e++) {
-    //   vehicleApi.applyEngineForce(forward || backward ? force * (forward && !backward ? -1 : 1) : 0, 2)
-    // }
-  })
-
   return (
-    <group ref={vehicle} position={[0, -0.4, 0]}>
-      <Chassis
-        ref={chassisBody}
-        loadWheels={(_wheels) => {
-          wheels.current = _wheels
-        }}
-      />
+    <group ref={vehcile}>
+      <Chassis ref={chassisBody} />
+      {wheels.map((wheel, index) => (
+        <Wheel key={index} radius={radius} ref={wheel} />
+      ))}
     </group>
   )
 }
+
 export default Vehicle
