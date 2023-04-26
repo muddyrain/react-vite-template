@@ -26,6 +26,9 @@ const Wheel = forwardRef<
     }),
     ref
   )
+  const isBack = useMemo(() => {
+    return ['rl', 'rr'].includes(direction)
+  }, [direction])
   return (
     <group ref={ref}>
       <mesh>

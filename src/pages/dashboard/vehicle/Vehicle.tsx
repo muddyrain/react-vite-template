@@ -6,7 +6,7 @@ import Chassis from './Chassis'
 import { useControls } from './useControls'
 import { useFrame } from '@react-three/fiber'
 import { DirectionType } from './types'
-const Vehicle = ({ radius = 0.35, width = 1.5, height = 1, depth = 2.5, force = 1500, steer = 0.5, maxBrake = 50 }) => {
+const Vehicle = ({ radius = 0.35, width = 1.5, height = 0.25, depth = 4.15, force = 1500, steer = 0.5, maxBrake = 50, back = -1.5, front = 1.15 }) => {
   const controls = useControls()
   // 设置
   const wheels = [useRef<Group>(null), useRef<Group>(null), useRef<Group>(null), useRef<Group>(null)]
@@ -16,8 +16,8 @@ const Vehicle = ({ radius = 0.35, width = 1.5, height = 1, depth = 2.5, force = 
       allowSleep: false,
       args: [width, height, depth],
       position: [0, 4, 0],
-      angularVelocity: [0, 0.5, 0],
-      rotation: [0, -Math.PI / 2, 0]
+      angularVelocity: [0, 0.25, 0],
+      rotation: [0, 0, 0]
     }),
     useRef<Group>(null)
   )
@@ -47,22 +47,22 @@ const Vehicle = ({ radius = 0.35, width = 1.5, height = 1, depth = 2.5, force = 
   }
   const wheelInfo1: WheelInfoOptions = {
     ...wheelOptions,
-    chassisConnectionPointLocal: [width / 2, -height / 2, depth / 2],
+    chassisConnectionPointLocal: [width / 2, height, front],
     isFrontWheel: true
   }
   const wheelInfo2: WheelInfoOptions = {
     ...wheelOptions,
-    chassisConnectionPointLocal: [-width / 2, -height / 2, depth / 2],
+    chassisConnectionPointLocal: [-width / 2, height, front],
     isFrontWheel: true
   }
   const wheelInfo3: WheelInfoOptions = {
     ...wheelOptions,
-    chassisConnectionPointLocal: [width / 2, -height / 2, -depth / 2],
+    chassisConnectionPointLocal: [width / 2, height + 0.05, back],
     isFrontWheel: false
   }
   const wheelInfo4: WheelInfoOptions = {
     ...wheelOptions,
-    chassisConnectionPointLocal: [-width / 2, -height / 2, -depth / 2],
+    chassisConnectionPointLocal: [-width / 2, height + 0.05, back],
     isFrontWheel: false
   }
   // 创建投射车辆
