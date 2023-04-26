@@ -9,13 +9,13 @@ const Wheel = forwardRef<Group, { radius: number }>(({ radius }, ref) => {
       mass: 1,
       material: 'wheel',
       type: 'Kinematic',
-      shapes: [{ args: [radius, radius, 0.2, 16], rotation: [-Math.PI / 2, 0, 0], type: 'Cylinder' }]
+      shapes: [{ args: [radius, radius, 0.2, 16], rotation: [0, 0, -Math.PI / 2], type: 'Cylinder' }]
     }),
     ref
   )
   return (
     <group ref={ref}>
-      <mesh rotation={[-Math.PI / 2, 0, 0]}>
+      <mesh rotation={[0, 0, -Math.PI / 2]}>
         <cylinderGeometry args={[0.5, 0.5, 0.4, 20]} />
         <meshStandardMaterial color={0xff0000} />
       </mesh>

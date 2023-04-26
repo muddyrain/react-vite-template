@@ -3,18 +3,24 @@ import { useRef } from 'react'
 import { Group, Mesh } from 'three'
 import Wheel from './Wheel'
 import Chassis from './Chassis'
+import { useControls } from './useControls'
+import { useFrame } from '@react-three/fiber'
 
-const Vehicle = ({ radius = 0.5, width = 3, height = 1, depth = 1.5 }) => {
+const Vehicle = ({ radius = 0.5, width = 1.5, height = 1, depth = 2.5, force = 1500, steer = 0.5, maxBrake = 50 }) => {
+  const controls = useControls()
   // 设置
   const wheels = [useRef<Group>(null), useRef<Group>(null), useRef<Group>(null), useRef<Group>(null)]
-  const [chassisBody] = useBox<Mesh>(() => ({
-    mass: 500,
-    allowSleep: false,
-    args: [width, height, depth],
-    position: [0, 4, 0],
-    angularVelocity: [0, 0.5, 0],
-    rotation: [0, -Math.PI / 2, 0]
-  }))
+  const [chassisBody] = useBox(
+    () => ({
+      mass: 500,
+      allowSleep: false,
+      args: [width, height, depth],
+      position: [0, 4, 0],
+      angularVelocity: [0, 0.5, 0],
+      rotation: [0, -Math.PI / 2, 0]
+    }),
+    useRef<Group>(null)
+  )
   const wheelOptions: WheelInfoOptions = {
     // 车轮半径
     radius,
@@ -27,7 +33,7 @@ const Vehicle = ({ radius = 0.5, width = 3, height = 1, depth = 1.5 }) => {
     // 最大的悬架时间行程
     maxSuspensionTravel: 0.3,
     // 车辆的转向轴
-    axleLocal: [0, 0, 1],
+    axleLocal: [-1, 0, 0],
     // 设置车轮的滑动摩擦力
     frictionSlip: 1.4,
     // 设置悬架的休息长度
@@ -41,7 +47,7 @@ const Vehicle = ({ radius = 0.5, width = 3, height = 1, depth = 1.5 }) => {
   }
   const wheelInfo1: WheelInfoOptions = {
     ...wheelOptions,
-    chassisConnectionPointLocal: [-width / 2, -height / 2, -depth / 2],
+    chassisConnectionPointLocal: [width / 2, -height / 2, depth / 2],
     isFrontWheel: true
   }
   const wheelInfo2: WheelInfoOptions = {
@@ -56,11 +62,11 @@ const Vehicle = ({ radius = 0.5, width = 3, height = 1, depth = 1.5 }) => {
   }
   const wheelInfo4: WheelInfoOptions = {
     ...wheelOptions,
-    chassisConnectionPointLocal: [width / 2, -height / 2, depth / 2],
+    chassisConnectionPointLocal: [-width / 2, -height / 2, -depth / 2],
     isFrontWheel: false
   }
   // 创建投射车辆
-  const [vehcile] = useRaycastVehicle(
+  const [vehcile, vehicleApi] = useRaycastVehicle(
     () => ({
       chassisBody,
       wheelInfos: [wheelInfo1, wheelInfo2, wheelInfo3, wheelInfo4],
@@ -68,6 +74,21 @@ const Vehicle = ({ radius = 0.5, width = 3, height = 1, depth = 1.5 }) => {
     }),
     useRef<Group>(null)
   )
+
+  useFrame((state) => {
+    const time = state.clock.getElapsedTime()
+    const { backward, brake, forward, left, reset, right } = controls.current
+    for (let e = 2; e < 4; e++) {
+      vehicleApi.applyEngineForce(forward || backward ? force * (forward && !backward ? -1 : 1) : 0, 2)
+    }
+    for (let s = 0; s < 2; s++) {
+      vehicleApi.setSteeringValue(left || right ? steer * (left && !right ? 1 : -1) : 0, s)
+    }
+
+    for (let b = 2; b < 4; b++) {
+      vehicleApi.setBrake(brake ? maxBrake : 0, b)
+    }
+  })
 
   return (
     <group ref={vehcile}>
