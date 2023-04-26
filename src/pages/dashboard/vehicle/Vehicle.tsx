@@ -5,8 +5,8 @@ import Wheel from './Wheel'
 import Chassis from './Chassis'
 import { useControls } from './useControls'
 import { useFrame } from '@react-three/fiber'
-
-const Vehicle = ({ radius = 0.5, width = 1.5, height = 1, depth = 2.5, force = 1500, steer = 0.5, maxBrake = 50 }) => {
+import { DirectionType } from './types'
+const Vehicle = ({ radius = 0.35, width = 1.5, height = 1, depth = 2.5, force = 1500, steer = 0.5, maxBrake = 50 }) => {
   const controls = useControls()
   // 设置
   const wheels = [useRef<Group>(null), useRef<Group>(null), useRef<Group>(null), useRef<Group>(null)]
@@ -90,11 +90,12 @@ const Vehicle = ({ radius = 0.5, width = 1.5, height = 1, depth = 2.5, force = 1
     }
   })
 
+  const wheelDirections: DirectionType[] = ['fl', 'fr', 'rl', 'rr']
   return (
     <group ref={vehcile}>
       <Chassis ref={chassisBody} />
       {wheels.map((wheel, index) => (
-        <Wheel key={index} radius={radius} ref={wheel} />
+        <Wheel key={index} direction={wheelDirections[index]} width={width} height={height} depth={depth} radius={radius} ref={wheel} />
       ))}
     </group>
   )
