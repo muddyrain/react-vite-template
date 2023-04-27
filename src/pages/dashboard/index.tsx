@@ -14,7 +14,7 @@ const Fragment: FC = () => {
       <Canvas
         shadows
         gl={{ antialias: true, logarithmicDepthBuffer: true, outputEncoding: sRGBEncoding, toneMapping: ACESFilmicToneMapping, alpha: false }}
-        camera={{ position: [5, 10, 10] }}
+        camera={{ fov: 50, position: [5, 10, 10] }}
       >
         {/* 雾 */}
         {/* <fog attach='fog' args={[color, 10, 50]} /> */}

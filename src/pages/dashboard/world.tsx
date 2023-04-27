@@ -9,7 +9,7 @@ const Plane = () => {
   const color = useWorldStore((state) => state.color)
   const [ref] = usePlane<Mesh>(() => ({ mass: 0, rotation: [-Math.PI / 2, 0, 0] }))
   return (
-    <mesh ref={ref}>
+    <mesh ref={ref} receiveShadow>
       <planeGeometry args={[1000, 1000]} />
       <meshStandardMaterial color={color} />
     </mesh>

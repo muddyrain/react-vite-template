@@ -4,22 +4,13 @@ const Light: FC = () => {
   return (
     <>
       {/* 环境光 */}
-      {/* <ambientLight intensity={0.5} /> */}
+      <ambientLight intensity={0.25} />
       {/* 半球光 */}
-      <hemisphereLight intensity={0.35} />
+      <hemisphereLight intensity={0.15} />
       {/* 点光源 */}
-      <pointLight intensity={1} position={[50, 50, 50]} />
+      <pointLight intensity={0.75} position={[50, 50, 50]} />
       {/* 聚光灯 */}
-      <spotLight
-        position={[20, 30, 10]}
-        angle={Math.PI / 5}
-        penumbra={1}
-        intensity={1}
-        distance={180}
-        castShadow
-        shadow-mapSize-width={256}
-        shadow-mapSize-height={256}
-      />
+      <spotLight position={[15, 50, 15]} angle={0.3} penumbra={1} intensity={2} castShadow shadow-mapSize-width={2048} shadow-mapSize-height={2048} />
       {/* 直线光 */}
       {/* <directionalLight position={[10, 50, 50]} castShadow shadow-mapSize={[2048, 2048]} /> */}
     </>
