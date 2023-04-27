@@ -1,5 +1,5 @@
 import { Debug, Physics, WheelInfoOptions, useBox, useCompoundBody, useCylinder, usePlane, useRaycastVehicle } from '@react-three/cannon'
-import { forwardRef, useRef } from 'react'
+import { FC, forwardRef, useRef } from 'react'
 import { Mesh, Group } from 'three'
 import Vehicle from './Vehicle/Vehicle'
 import Wall from './Wall'
@@ -9,6 +9,7 @@ const Plane = () => {
   return (
     <mesh ref={ref}>
       <planeGeometry args={[1000, 1000]} />
+      <meshStandardMaterial color={'#efa464'} />
     </mesh>
   )
 }
