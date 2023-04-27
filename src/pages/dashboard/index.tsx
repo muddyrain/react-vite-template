@@ -1,12 +1,14 @@
 import { FC, Suspense } from 'react'
 import { Canvas, useLoader, useFrame } from '@react-three/fiber'
-import { OrbitControls, Environment, Stats } from '@react-three/drei'
+import { OrbitControls, Environment, Stats, useGLTF } from '@react-three/drei'
 import World from './World'
 import { ACESFilmicToneMapping, sRGBEncoding } from 'three'
 import { useWorldStore } from '@/store/world'
 import Light from './light'
 import { useLoading } from './hooks/useLoading'
 import Loading from './Loading'
+
+useGLTF.preload('./chassis.glb')
 
 const Fragment: FC = () => {
   // 物理世界颜色
