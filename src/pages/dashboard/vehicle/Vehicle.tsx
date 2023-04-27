@@ -15,8 +15,8 @@ const Vehicle = ({ radius = 0.35, width = 1.5, height = 0.25, depth = 4.15, forc
       mass: 500,
       allowSleep: false,
       args: [width, height, depth],
-      position: [0, 4, 0],
-      angularVelocity: [0, 0.25, 0],
+      position: [0, 2, 0],
+      angularVelocity: [0, 0.5, 0],
       rotation: [0, 0, 0]
     }),
     useRef<Group>(null)

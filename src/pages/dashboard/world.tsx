@@ -2,6 +2,7 @@ import { Debug, Physics, WheelInfoOptions, useBox, useCompoundBody, useCylinder,
 import { forwardRef, useRef } from 'react'
 import { Mesh, Group } from 'three'
 import Vehicle from './Vehicle/Vehicle'
+import Wall from './Wall'
 
 const Plane = () => {
   const [ref] = usePlane<Mesh>(() => ({ mass: 0, rotation: [-Math.PI / 2, 0, 0] }))
@@ -14,10 +15,11 @@ const Plane = () => {
 
 const World = () => {
   return (
-    <Physics>
+    <Physics iterations={5}>
       <Debug color='black' scale={1.1}>
-        <Plane />
+        <Wall />
         <Vehicle />
+        <Plane />
       </Debug>
     </Physics>
   )

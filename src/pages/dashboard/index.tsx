@@ -23,7 +23,7 @@ const Fragment: FC = () => {
         {/* 环境贴图 */}
         {/* <Environment files={'./023.hdr'} background /> */}
         {/* 直线光 */}
-        {/* <directionalLight position={[0, 0, 5]} /> */}
+        <directionalLight position={[10, 10, 10]} castShadow shadow-mapSize={[2048, 2048]} />
         {/* 帧率显示器 */}
         <Stats />
         {/* 辅助控制器 */}
