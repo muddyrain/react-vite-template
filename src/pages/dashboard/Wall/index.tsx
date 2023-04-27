@@ -1,7 +1,7 @@
 import { Triplet, useBox } from '@react-three/cannon'
 import { FC, useEffect } from 'react'
 import { Mesh } from 'three'
-
+import { useControls } from 'leva'
 const Box: FC<{
   position: Triplet
   mass: number
@@ -9,11 +9,14 @@ const Box: FC<{
   height: number
   depth: number
 }> = ({ position, mass, width, height, depth }) => {
+  const controls = useControls({
+    box: { value: '#ffffff' }
+  })
   const [ref] = useBox<Mesh>(() => ({ mass, args: [width, height, depth], position }))
   return (
-    <mesh ref={ref}>
+    <mesh ref={ref} castShadow={true} receiveShadow={true}>
       <boxGeometry />
-      <meshStandardMaterial />
+      <meshStandardMaterial color={controls.box} />
     </mesh>
   )
 }

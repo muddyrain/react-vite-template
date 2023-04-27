@@ -1,7 +1,8 @@
 import { useGLTF } from '@react-three/drei'
 import { useLoader } from '@react-three/fiber'
 import { forwardRef, useEffect, useRef } from 'react'
-import { Group, Mesh, MeshPhysicalMaterial, MeshStandardMaterial, MultiplyBlending, Object3D, TextureLoader } from 'three'
+import { Color, Group, Mesh, MeshPhysicalMaterial, MeshStandardMaterial, MultiplyBlending, Object3D, TextureLoader } from 'three'
+import { useControls } from 'leva'
 
 const glassMaterial = new MeshPhysicalMaterial({
   color: 0xffffff,
@@ -27,15 +28,23 @@ export const detailsMaterial = new MeshStandardMaterial({
 const Chassis = forwardRef<Group>((_, ref) => {
   const gltf = useGLTF('./chassis.glb')
   const shadow = useLoader(TextureLoader, './ferrari_ao.png')
+  const controls = useControls({
+    glass: { value: '#ffffff' },
+    body: { value: '#ff0000' },
+    details: { value: '#ffffff' }
+  })
   useEffect(() => {
     const carModel = gltf.scene.children[0] as Object3D
     const glass = carModel.getObjectByName('glass') as Mesh
+    glassMaterial.color = new Color(controls.glass)
     glass.material = glassMaterial
     const body = carModel.getObjectByName('body') as Mesh
+    bodyMaterial.color = new Color(controls.body)
     body.material = bodyMaterial
     const trim = carModel.getObjectByName('trim') as Mesh
+    detailsMaterial.color = new Color(controls.details)
     trim.material = detailsMaterial
-  }, [])
+  }, [controls])
   return (
     <group ref={ref}>
       <mesh rotation={[0, -Math.PI, 0]} position={[0, -0.3, 0]}>

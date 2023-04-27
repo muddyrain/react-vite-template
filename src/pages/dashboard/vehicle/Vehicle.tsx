@@ -66,7 +66,7 @@ const Vehicle = ({ radius = 0.35, width = 1.5, height = 0.25, depth = 4.15, forc
     isFrontWheel: false
   }
   // 创建投射车辆
-  const [vehcile, vehicleApi] = useRaycastVehicle(
+  const [vehicle, vehicleApi] = useRaycastVehicle(
     () => ({
       chassisBody,
       wheelInfos: [wheelInfo1, wheelInfo2, wheelInfo3, wheelInfo4],
@@ -92,7 +92,7 @@ const Vehicle = ({ radius = 0.35, width = 1.5, height = 0.25, depth = 4.15, forc
 
   const wheelDirections: DirectionType[] = ['fl', 'fr', 'rl', 'rr']
   return (
-    <group ref={vehcile}>
+    <group ref={vehicle} castShadow={true} receiveShadow={true}>
       <Chassis ref={chassisBody} />
       {wheels.map((wheel, index) => (
         <Wheel key={index} direction={wheelDirections[index]} width={width} height={height} depth={depth} radius={radius} ref={wheel} />
