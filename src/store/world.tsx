@@ -2,10 +2,12 @@ import { create } from 'zustand'
 
 type State = {
   color: string
+  process: number
+  setProcess: (process: number) => void
 }
-type Actions = {}
 
-export const useWorldStore = create<State & Actions>((set) => ({
+export const useWorldStore = create<State>((set) => ({
   color: '#efa464',
-  cameraPosition: [0, 0, 0]
+  process: 0,
+  setProcess: (process: number) => set({ process })
 }))
