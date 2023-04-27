@@ -1,23 +1,51 @@
-import { WheelInfoOptions, useBox, useRaycastVehicle } from '@react-three/cannon'
-import { useRef } from 'react'
+import { Triplet, WheelInfoOptions, useBox, useRaycastVehicle } from '@react-three/cannon'
+import { FC, useRef } from 'react'
 import { Group, Mesh } from 'three'
 import Wheel from './Wheel'
 import Chassis from './Chassis'
 import { useControls } from './useControls'
 import { useFrame } from '@react-three/fiber'
 import { DirectionType } from './types'
-const Vehicle = ({ radius = 0.35, width = 1.5, height = 0.25, depth = 4.15, force = 1500, steer = 0.5, maxBrake = 50, back = -1.5, front = 1.15 }) => {
+
+interface VehicleProps {
+  radius?: number
+  width?: number
+  height?: number
+  depth?: number
+  force?: number
+  steer?: number
+  maxBrake?: number
+  back?: number
+  front?: number
+  position: Triplet
+  angularVelocity: Triplet
+  rotation: Triplet
+}
+const Vehicle: FC<VehicleProps> = ({
+  radius = 0.35,
+  width = 1.5,
+  height = 0.25,
+  depth = 4.15,
+  force = 1500,
+  steer = 0.5,
+  maxBrake = 50,
+  back = -1.5,
+  front = 1.15,
+  position,
+  angularVelocity,
+  rotation
+}) => {
   const controls = useControls()
   // 设置
   const wheels = [useRef<Group>(null), useRef<Group>(null), useRef<Group>(null), useRef<Group>(null)]
-  const [chassisBody] = useBox(
+  const [chassisBody, chassisApi] = useBox(
     () => ({
       mass: 500,
       allowSleep: false,
       args: [width, height, depth],
-      position: [0, 2, 0],
-      angularVelocity: [0, 0.5, 0],
-      rotation: [0, 0, 0]
+      position,
+      angularVelocity,
+      rotation
     }),
     useRef<Group>(null)
   )
@@ -87,6 +115,13 @@ const Vehicle = ({ radius = 0.35, width = 1.5, height = 0.25, depth = 4.15, forc
 
     for (let b = 2; b < 4; b++) {
       vehicleApi.setBrake(brake ? maxBrake : 0, b)
+    }
+
+    if (reset) {
+      chassisApi.position.set(...position)
+      chassisApi.velocity.set(0, 0, 0)
+      chassisApi.angularVelocity.set(...angularVelocity)
+      chassisApi.rotation.set(...rotation)
     }
   })
 

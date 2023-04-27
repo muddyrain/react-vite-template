@@ -21,7 +21,7 @@ const World = () => {
     <Physics iterations={5}>
       <Debug color='black' scale={1.1}>
         <Wall />
-        <Vehicle />
+        <Vehicle position={[0, 2, 0]} angularVelocity={[0, 0.5, 0]} rotation={[0, 0, 0]} />
         <Plane />
       </Debug>
     </Physics>
