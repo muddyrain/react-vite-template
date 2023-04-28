@@ -1,4 +1,4 @@
-import { useWorldStore } from '@/store/world'
+import { useWorldStore } from '../useWorldStore'
 import * as THREE from 'three'
 export const useLoading = () => {
   const setProcess = useWorldStore((state) => state.setProcess)
