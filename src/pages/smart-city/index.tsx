@@ -1,7 +1,6 @@
-import { OrbitControls, useCubeTexture } from '@react-three/drei'
+import { OrbitControls, Stats } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import City from './City'
-import { STATIC_SERVER_URL } from '@/constant'
 import Scene from './Scene'
 
 const Fragment = () => {
@@ -14,6 +13,8 @@ const Fragment = () => {
       <spotLight intensity={1} />
       {/* 添加轨道控制器 */}
       <OrbitControls />
+      {/* 帧率检测器 */}
+      <Stats />
     </Canvas>
   )
 }

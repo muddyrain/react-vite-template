@@ -31,6 +31,7 @@ specifiers:
   eslint-plugin-prettier: ^4.2.1
   eslint-plugin-react: ^7.32.2
   eslint-plugin-storybook: ^0.6.4
+  gsap: ^3.11.5
   husky: ^7.0.1
   koa: ^2.14.2
   koa-static: ^5.0.0
@@ -70,6 +71,7 @@ dependencies:
   eslint-config-prettier: 8.8.0_eslint@8.32.0
   eslint-plugin-prettier: 4.2.1_b6helvwhx77j4pfoq4jrrhvgra
   eslint-plugin-react: 7.32.2_eslint@8.32.0
+  gsap: 3.11.5
   koa: 2.14.2
   koa-static: 5.0.0
   koa2-cors: 2.0.6
@@ -3362,6 +3364,10 @@ packages:
 
   /grapheme-splitter/1.0.4:
     resolution: {integrity: sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==}
+
+  /gsap/3.11.5:
+    resolution: {integrity: sha512-Q89nKCLgoX5xUjznh9LcaIUkz54k1voNucT1Rpf9SJNFIQznBwFqt5qUUQbeVInFyN/n18OUJkpeI6CNEDt74w==}
+    dev: false
 
   /har-schema/2.0.0:
     resolution: {integrity: sha512-Oqluz6zhGX8cyRaTQlFMPw80bSJVG2x/cFb8ZPhUILGgHka9SsokCCOQgpveePerqidZOrT14ipqfJb7ILcW5Q==}

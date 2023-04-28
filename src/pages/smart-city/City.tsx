@@ -1,8 +1,9 @@
 import { STATIC_SERVER_URL } from '@/constant'
-import { useGLTF } from '@react-three/drei'
+import { CycleRaycast, useGLTF } from '@react-three/drei'
 import { useControls } from 'leva'
 import { useEffect, useState } from 'react'
 import * as THREE from 'three'
+import FlyLine from './FlyLine'
 
 const City = () => {
   const gltf = useGLTF(STATIC_SERVER_URL + `/models/city.glb`)
@@ -34,12 +35,15 @@ const City = () => {
   }, [controls])
   const scale = Layerbuildings?.scale || new THREE.Vector3(1, 1, 1)
   return (
-    <primitive object={gltf.scene}>
-      <lineSegments scale={[scale.x, scale.x, scale.x]}>
-        <edgesGeometry args={[Layerbuildings?.geometry]} />
-        <lineBasicMaterial color={controls.buildingsLineColor} />
-      </lineSegments>
-    </primitive>
+    <mesh>
+      <primitive object={gltf.scene}>
+        <lineSegments scale={[scale.x, scale.x, scale.x]}>
+          <edgesGeometry args={[Layerbuildings?.geometry]} />
+          <lineBasicMaterial color={controls.buildingsLineColor} />
+        </lineSegments>
+      </primitive>
+      <FlyLine />
+    </mesh>
   )
 }
 export default City
