@@ -2,6 +2,7 @@ import { Icon } from '@bees/ui'
 import Home from '@/pages/home'
 import Dashboard from '@/pages/dashboard'
 import SmartCity from '@/pages/smart-city'
+import SmartPark from '@/pages/smart-park'
 import Login from '@/pages/login'
 import SystemSettings from '@/pages/system-settings'
 import ComponentsManagement from '@/pages/components-management'
@@ -41,6 +42,11 @@ const routes: RoutesProps[] = [
     name: '智慧城市',
     path: '/smart-city',
     element: <SmartCity />
+  },
+  {
+    name: '智慧园区',
+    path: '/smart-park',
+    element: <SmartPark />
   },
   {
     name: '组件管理',
