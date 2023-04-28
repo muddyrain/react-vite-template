@@ -4,7 +4,13 @@ import { useControls } from 'leva'
 import { useEffect, useState } from 'react'
 import * as THREE from 'three'
 import FlyLine from './FlyLine'
+import LightWall from './LightWall'
+import { modifycityMaterial } from './shaders/modifyCityMaterial'
 
+// 随机数字函数
+function random(min: number, max: number) {
+  return Math.random() * (max - min) + min
+}
 const City = () => {
   const gltf = useGLTF(STATIC_SERVER_URL + `/models/city.glb`)
   const [Layerbuildings, setLayerbuildings] = useState<THREE.Mesh>()
@@ -27,6 +33,7 @@ const City = () => {
         })
         // 修改物体的颜色材质
         meshItem.material = cityMaterial
+        modifycityMaterial(meshItem)
         if (meshItem.name === 'Layerbuildings') {
           setLayerbuildings(meshItem)
         }
@@ -42,7 +49,17 @@ const City = () => {
           <lineBasicMaterial color={controls.buildingsLineColor} />
         </lineSegments>
       </primitive>
-      <FlyLine />
+      {Array.from({ length: 100 }).map((_, index) => (
+        <FlyLine
+          key={index}
+          points={[
+            new THREE.Vector3(0, 0, 0),
+            new THREE.Vector3(random(0, 10) - 5, random(0, 10) - 5, random(0, 10) - 5),
+            new THREE.Vector3(random(0, 10) - 5, 0, random(0, 10) - 5)
+          ]}
+        />
+      ))}
+      <LightWall />
     </mesh>
   )
 }
