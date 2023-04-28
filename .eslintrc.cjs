@@ -56,6 +56,7 @@ module.exports = {
     'no-empty-function': 0,
     // 禁止空函数
     'space-in-parens': 2, // 强制在圆括号内使用一致的空格，前后不出现空格
-    'react/no-unknown-property': 0
+    'react/no-unknown-property': 0, // react 位置类型校验
+    '@typescript-eslint/no-non-null-assertion': 0 // 禁止使用后缀运算符进行非空断言!。
   }
 }
