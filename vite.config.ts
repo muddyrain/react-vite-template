@@ -17,7 +17,8 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
     ],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, 'src')
+        '@': path.resolve(__dirname, 'src'),
+        '@/static': path.resolve(__dirname, 'server/static/')
       }
     }
   }
