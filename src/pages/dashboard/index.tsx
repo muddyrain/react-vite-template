@@ -7,8 +7,9 @@ import { useWorldStore } from '@/pages/dashboard/useWorldStore'
 import Light from './Light'
 import { useLoading } from './hooks/useLoading'
 import Loading from './Loading'
+import { STATIC_SERVER_URL } from '@/constant'
 
-useGLTF.preload('./chassis.glb')
+useGLTF.preload(STATIC_SERVER_URL + '/ferrari/chassis.glb')
 
 const Fragment: FC = () => {
   // 物理世界颜色

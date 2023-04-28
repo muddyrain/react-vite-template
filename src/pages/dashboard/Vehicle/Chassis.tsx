@@ -3,6 +3,7 @@ import { useLoader } from '@react-three/fiber'
 import { forwardRef, useEffect, useRef } from 'react'
 import { Color, Group, Mesh, MeshPhysicalMaterial, MeshStandardMaterial, MultiplyBlending, Object3D, TextureLoader } from 'three'
 import { useControls } from 'leva'
+import { STATIC_SERVER_URL } from '@/constant'
 
 const glassMaterial = new MeshPhysicalMaterial({
   color: 0xffffff,
@@ -26,8 +27,8 @@ export const detailsMaterial = new MeshStandardMaterial({
 })
 
 const Chassis = forwardRef<Group>((_, ref) => {
-  const gltf = useGLTF('./chassis.glb')
-  const shadow = useLoader(TextureLoader, './ferrari_ao.png')
+  const gltf = useGLTF(STATIC_SERVER_URL + '/ferrari/chassis.glb')
+  const shadow = useLoader(TextureLoader, STATIC_SERVER_URL + '/ferrari/ferrari_ao.png')
   const controls = useControls({
     glass: { value: '#ffffff' },
     body: { value: '#ff0000' },

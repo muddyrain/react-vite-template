@@ -7,3 +7,6 @@ export const SEX = [
   { label: '男', value: 1 },
   { label: '女', value: 2 }
 ]
+
+// 静态资源服务器
+export const STATIC_SERVER_URL = 'http://127.0.0.1:5174'

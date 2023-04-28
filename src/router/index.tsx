@@ -1,8 +1,8 @@
 import { Icon } from '@bees/ui'
 import Home from '@/pages/home'
 import Dashboard from '@/pages/dashboard'
+import SmartCity from '@/pages/smart-city'
 import Login from '@/pages/login'
-import Overview from '@/pages/overview'
 import SystemSettings from '@/pages/system-settings'
 import ComponentsManagement from '@/pages/components-management'
 import Ongoing from '@/pages/project-management/ongoing'
@@ -36,14 +36,11 @@ const routes: RoutesProps[] = [
     name: '仪表盘',
     path: '/dashboard',
     element: <Dashboard />
-    // pure: true,
-    // hideMenu: true
   },
   {
-    icon: <Icon type='dashboard-2' />,
-    name: '概览',
-    path: '/overview',
-    element: <Overview />
+    name: '智慧城市',
+    path: '/smart-city',
+    element: <SmartCity />
   },
   {
     name: '组件管理',

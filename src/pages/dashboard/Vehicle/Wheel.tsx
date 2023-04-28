@@ -5,6 +5,7 @@ import { DirectionType } from './types'
 import { useGLTF } from '@react-three/drei'
 import { Vector3 } from '@react-three/fiber'
 import { detailsMaterial } from './Chassis'
+import { STATIC_SERVER_URL } from '@/constant'
 
 const Wheel = forwardRef<
   Group,
@@ -16,7 +17,7 @@ const Wheel = forwardRef<
     depth: number
   }
 >(({ radius, direction, width, height, depth }, ref) => {
-  const gltf = useGLTF(`./wheel_${direction}.glb`)
+  const gltf = useGLTF(STATIC_SERVER_URL + `/ferrari/wheel_${direction}.glb`)
   useCompoundBody(
     () => ({
       collisionFilterGroup: 0,
