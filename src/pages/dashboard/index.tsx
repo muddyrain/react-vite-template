@@ -16,7 +16,7 @@ const Fragment: FC = () => {
   useLoading()
   const process = useWorldStore((state) => state.process)
   return (
-    <div className='w-screen h-screen'>
+    <div className='w-full h-full'>
       <Canvas
         shadows
         gl={{ antialias: true, logarithmicDepthBuffer: true, outputEncoding: sRGBEncoding, toneMapping: ACESFilmicToneMapping, alpha: false }}

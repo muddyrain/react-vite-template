@@ -35,9 +35,9 @@ const routes: RoutesProps[] = [
   {
     name: '仪表盘',
     path: '/dashboard',
-    element: <Dashboard />,
-    pure: true,
-    hideMenu: true
+    element: <Dashboard />
+    // pure: true,
+    // hideMenu: true
   },
   {
     icon: <Icon type='dashboard-2' />,
