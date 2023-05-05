@@ -1,11 +1,14 @@
 import { create } from 'zustand'
 import * as THREE from 'three'
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 100000)
-camera.position.set(1000, 1000, 1000)
-
+import { defaultCamera } from './camera'
 interface State {
-  camera: THREE.PerspectiveCamera
+  activeCamera: THREE.PerspectiveCamera
+  setActiveCamera: (camera: THREE.Camera) => void
 }
 export const useWorldStore = create<State>((set) => ({
-  camera
+  activeCamera: defaultCamera,
+  setActiveCamera: (camera) =>
+    set(() => ({
+      activeCamera: camera as THREE.PerspectiveCamera
+    }))
 }))
